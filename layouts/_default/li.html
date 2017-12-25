@@ -1,0 +1,45 @@
+						<!-- Post -->
+							<article class="post not-small">
+								<header>
+									<div class="title">
+										<h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+										<p>{{ .Params.subtitle }}</p>
+									</div>
+									<div class="meta"> 
+										<time class="published" datetime="{{ .Date.Format "2006-01-02T15:04:05" }}">{{ .Date.Format "January 2, 2006" }}</time>
+										<p class="readingtime">{{ .ReadingTime }} min read</p>
+									</div>
+
+								</header>
+
+
+									{{ if .Params.featured_image }}
+									<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image featured"><img src="{{ .Params.featured_image }}" alt="{{ .Title }}" /></a>
+									{{ else }}
+									<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image featured"><img src="{{ .Site.BaseURL }}images/fractal_thumb.png" alt="{{ .Title }}" /></a>
+									{{ end }}
+
+
+
+									<p>{{ .Summary }}</p>
+								<footer>
+									{{ if .Truncated }}
+										<ul class="actions">
+											<li><a href="{{ .Permalink }}" class="button big">{{ i18n "continue_reading" }}</a></li>
+										</ul>
+										{{else}}
+										<ul class="actions">
+											<li><a href="{{ .Permalink }}#comments" class="button big">{{ i18n "comment" }}</a></li>
+										</ul>
+									{{ end }}
+									{{ if .Params.categories }}
+											{{ $baseurl := .Site.BaseURL }}
+									<ul class="stats">
+												{{ range $index, $category := .Params.categories }}
+													<li><a href="{{ $baseurl }}categories/{{ $category | urlize }}/">{{ $category }}</a></li>
+												{{ end }}
+
+									</ul>
+									{{ end }}
+								</footer>
+							</article>

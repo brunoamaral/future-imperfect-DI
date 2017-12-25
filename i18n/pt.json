@@ -1,0 +1,35 @@
+{
+  "continue_reading": {
+    "other": "Continuar a ler"
+  },
+  "comment":{
+      "other": "Comentar"
+  },
+  "categories": {
+    "other": "Categorias"
+  },
+  "latest_post": {
+    "other": "Último Artigo"
+  },
+  "newer_posts": {
+    "other": "Artigos mais recentes"
+  },
+  "reading_time": {
+    "other": "min de leitura"
+  },
+  "older_posts": {
+    "other": "Artigos mais antigos"
+  },
+  "related_links":{
+    "other":"Links relacionados"
+  },
+  "search": {
+    "other": "Pesquisar"
+  },
+  "stories": {
+    "other": "Histórias"
+  },
+  "tags": {
+    "other":"Etiquetas"
+  }
+}

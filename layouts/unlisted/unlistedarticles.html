@@ -1,0 +1,34 @@
+{{ partial "header.html" . }}
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				{{ partial "top_navigation.html" . }}
+
+				<!-- Main -->
+					<div id="main">
+					{{ partial "title_section.html" . }}
+
+					<div class="row">
+						<div class="12u$">
+
+							<section id="category-list">
+								<div class="mini-posts">
+
+								{{ range where .Site.Pages ".Params.unlisted" "=" true  }}
+									{{ .Render "summary"}}
+								{{ end }}
+								</div>
+							</section>
+						</div>
+					</div>
+
+						<div class="spacer"></div>
+
+
+					</div>
+
+		</div>
+		{{ partial "footer-links.html" . }}
+	{{ partial "footer.html" . }}

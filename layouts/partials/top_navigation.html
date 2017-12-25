@@ -1,0 +1,57 @@
+{{ $currentPage := . }}
+
+
+
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="{{ .Site.BaseURL | absLangURL }}{{ .LanguagePrefix }}">{{ .Site.Title }}</a></h1>
+						<nav class="links">
+							<ul>
+
+							{{ range .Site.Menus.main }}
+								<li><a href="{{ .URL | absLangURL }}" class="{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}active{{end}}">{{ .Name }}</a></li>
+							{{ end }}
+
+							</ul>
+						</nav>
+
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">{{ i18n "search" }}</a>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+					<!-- Menu -->
+						<section id="menu">
+						<h2 class="sr-only">Index</h2>
+							<!-- Links -->
+								<section>
+
+									<ul class="links"> 									
+									{{ range .Site.Menus.main }}
+									<li>
+										<a href="{{ .URL | absLangURL }}" {{if $currentPage.IsMenuCurrent "main" . }} class="active"{{end}}>
+										<h3>{{.Name}}</h3>
+										<p>{{.Post}}</p>
+										</a>
+									</li>
+									{{ end }}
+
+									</ul>
+								</section>
+
+						</section>
+						<div id="morphsearch" class="morphsearch">
+							<form class="morphsearch-form" id="search" onsubmit="return false">
+							</form>
+							<div class="morphsearch-content">
+							</div><!-- /morphsearch-content -->
+							<span class="morphsearch-close"></span>
+						</div><!-- /morphsearch -->

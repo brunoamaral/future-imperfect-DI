@@ -1,0 +1,48 @@
+{{ partial "header.html" . }}
+	<body class="page">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				{{ partial "top_navigation.html" . }}
+
+				<!-- Main -->
+					<div id="main">					
+						<article class="post">
+						<header style="margin-bottom:0; background-color: {{ .Params.story_color }}">
+							<div class="title">
+								<h2 style="text-align: center;">{{ .Params.story_title }}</h2>
+								{{ with .Params.story_subtitle }} <p>{{ . }}</p> {{ end }}
+							</div>
+						</header>
+						<section>
+						<div class="full-width" style="background: no-repeat center/cover url({{ .Site.BaseURL }}{{ .Params.story_featured_image }}); height: {{ with .Params.story_header_height }} {{ . }} {{ else  }} 200px{{ end }};"></div>
+							<div class="row">
+								<div class="12u 12u$(medium)">
+								{{ .Params.story_description }}
+								{{ .Content }}
+								</div>
+							</div>
+						</section>
+						</article>
+
+					<div class="row">
+						<div class="12u$">
+							<section id="category-list">
+								<div class="mini-posts">
+										{{range (.Paginate ( where .Data.Pages "Type" "stories")  9).Pages}}
+											{{ .Render "summary"}}
+										{{ end }}
+								</div>
+							</section>
+						</div>
+					</div>
+
+						<div class="spacer"></div>
+
+						{{ partial "pagination.html" . }}
+					</div>
+
+		</div>
+		{{ partial "footer-links.html" . }}
+	{{ partial "footer.html" . }}

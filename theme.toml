@@ -1,0 +1,12 @@
+name = "Light"
+license = "N/A"
+licenselink = ""
+description = "Reboot Light is blog theme for hugo."
+tags = ["blog"]
+features = ["blog"]
+min_version = 0.14
+
+[author]
+    name = "Bruno Amaral"
+    homepage = "http://brunoamaral.eu/"
+

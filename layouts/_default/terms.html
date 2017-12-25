@@ -1,0 +1,61 @@
+{{ partial "header.html" . }}
+
+<body>
+{{ partial "googletagmanager.html" }}
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+				{{ partial "top_navigation.html" . }}
+
+				<!-- Main -->
+				<div id="main">
+					{{ partial "title_section.html" .}}
+					<section id="category-list">
+					<h2>stories</h2>
+						<div class="mini-posts">
+						{{ $baseurl := .Site.BaseURL }}
+
+						{{ $stories := where (where .Site.Pages "Section" "stories") ".Params.unlisted" "!=" true | intersect (where .Site.Pages "Params.story_published" "=" true)  }}
+
+						{{ range $stories }} 
+							<article class="mini-post stories">
+								<header>
+									{{ with .Params.story_subtitle }} <p>{{ . }}</p>{{ end }}
+								
+								</header>
+								<a href="{{ .Permalink }}" class="image mini-featured-image" {{ if eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }} style="background-image: url('{{ .Params.story_featured_image }}'); background-position: 40% 40%;" {{ else }} style="background-image: url('{{ .Params.story_featured_image | replaceRE ".jpg|.jpeg|.JPG" "_500.jpg" }}'); background-position: 40% 40%;" {{ end }} ><h3 style="background-color: rgba(255,255,255,0.7)">{{  .Params.story_title }}</h3></a>
+							</article>
+
+						{{ end }}
+						</div>
+					</section>
+					
+					<section id="all-categories">
+					<article class="post">
+
+						<h2>{{ i18n "categories" }}</h2>
+							<ul>
+									{{ $baseurl := .Site.BaseURL }}
+									<!-- {{ $list_posts := where (where (where .Data.Pages "Type" "post") ".Params.unlisted" "!=" true) ".Params.draft" "=" false }} -->
+									{{ range $key, $value := .Site.Taxonomies.categories }}
+										<li><a href="{{ $baseurl  }}categories/{{ $key | urlize  }}">{{ $key | humanize }}</a> ({{ len $value }})</li>
+									{{ end }}
+							</ul>
+
+							<h2>{{ i18n "tags" }}</h2>
+								<ul class="tags">
+										{{ $baseurl := .Site.BaseURL }}
+										{{ range $key, $value := .Site.Taxonomies.tags }}
+										<li><a href="{{ $baseurl  }}tags/{{ $key | urlize  }}" title="Posts tagged with '{{ $key | humanize }}'">{{ $key | humanize }}</a> ({{ len $value }})</li>
+										{{ end }}
+								</ul>
+
+					</article>
+					</section>
+
+				</div>
+
+		</div>
+		{{ partial "footer-links.html" . }}
+
+		{{ partial "footer.html" . }}

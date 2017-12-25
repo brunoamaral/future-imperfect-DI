@@ -1,0 +1,8 @@
+<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+<h4 class="title">{{ .Get "title" }}</h4>
+<div class="row">
+	<div class="gallery 12u$" itemscope itemtype="http://schema.org/ImageGallery" data-masonry='{ "itemSelector": "figure", "gutter": 1}'>
+	{{ .Inner }}
+
+	</div>
+</div>

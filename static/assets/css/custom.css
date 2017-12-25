@@ -1,0 +1,271 @@
+video{
+	width: 100%;
+	height: auto;
+}
+
+/**/
+/* TYPOGRAPHY */
+/**/
+.highlight{
+	padding: 1em 1.5em;
+	margin:0 0 2em 0;
+}
+.highlight.blue{
+	background-color: rgba(0, 119, 181, 0.075);
+	border: 1px solid rgba(0,119,181,0.3);
+}
+.highlight .grey{
+	background-color: rgba(160,160,160,0.075); 
+	border: 1px solid rgba(160,160,160,0.3);
+}
+
+.body-subtitle{
+	font-weight: normal;
+}
+
+article .text, section .text{
+	column-width: 25em;
+	column-gap: 5em;
+	vertical-align: top;
+}
+
+/*a{
+	color: #2ebaae;
+}*/
+/**/
+/* GALLERY */
+/**/
+#main .gallery figure {
+    width: 308px;
+    height: auto;
+    margin: 0 auto 0 auto;
+    padding: 1px 0px 1px 0px;
+    display: block;
+}
+
+/**/
+/* LAYOUT */
+/**/
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+div.full-width{margin-right: -1.5em; margin-left: -1.5em; margin-bottom: 1em
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+	div.full-width{margin-right: -3em; margin-left: -3em; margin-bottom: 1em;}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+/**/
+/* FORM */
+/**/
+input[type="submit"], .button .green-button {
+	background-color: #49d6ca;
+}
+input[type="submit"], .button {
+	background-color: transparent;
+}
+/* ALL DEVICES */
+div.spacer{
+	float: none;
+	clear: both;
+}
+section#intro{
+	text-align: center;
+}
+
+div.bottom{
+	display: flex;
+	justify-content: space-between;
+	padding: 0 0 3em;
+	flex-flow: wrap;
+}
+
+div.bottom div{
+	flex: 1 1 auto;
+}
+
+#footer{
+	width: auto;
+	text-align: center;
+	margin: 0 auto;
+}
+img{width: 100%}
+
+section#category-list .mini-posts{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+
+a.mini-featured-image {
+	max-height: 176px;
+}
+
+a.image.mini-featured-image > img{
+	margin-top:-20%;
+}
+
+body.page header .title h2, body.page header .title > p{
+	text-align: center;
+}
+
+.mini-post .stories{
+
+}
+article.mini-post.stories > .mini-featured-image{	
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding:7em 4.25em 0.1em 1.25em;
+}
+
+.disabled-featured-image{filter: brightness(200%)  grayscale(1);}
+.disabled-featured-image:hover{filter: brightness(100%)  grayscale(1); }
+
+ul.tags{
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+}
+
+ul.tags li {
+}
+
+#intro .logo:before{
+	background-image: none;
+}
+#intro .logo {
+	padding: 0;
+	margin: 0;
+	width: auto;
+	display: inline;
+}
+#intro .logo > img {
+	margin: 0 auto;
+	padding:0px;
+	width: 350px;
+}
+#intro header{
+	margin-top:-100px;
+}
+svg#svgLogo{
+	width: 150px;
+}
+#intro header h2{ color:#f0ad05;}
+/*#intro .logo img {
+	margin:0 auto;
+}*/
+/** Fix bug on next button **/
+.button.disabled::after{color: rgba(160, 160, 160, 0.3) !important}
+/** SMARTPHONE **/
+
+@media (min-width: 544px) {
+	div.bottom{
+
+	}
+
+	section#category-list article.mini-post {
+		width: 100%;
+	}
+}
+
+/** TABLET **/
+
+@media (min-width: 768px) {
+	div.bottom{
+		flex-flow:row nowrap;
+		flex-basis: 2em;
+	}
+
+#category-list .mini-posts > *{
+	margin: 2em 0em 0 0;
+}
+
+	div.bottom div:nth-child(2){
+		margin: 0 3px;
+	}
+	section#category-list article.mini-post {
+		width: 32%;
+	}
+
+}
+
+/* DESKTOP 992px and up */ 
+@media (min-width: 992px) {
+	div.bottom{
+		padding: 0 3em 3em 3em;
+	}
+
+	section#category-list article.mini-post {
+		width: 32%;
+	}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+#large-background{
+	display: none;
+}
+
+@media (min-width: 1200px) {
+	#large-background{
+		display: block;
+		width: 100%;
+		height: 100vh;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index:1;
+		filter: blur(4px);
+	}
+	#main {
+
+	}
+	body.single .post{
+		max-width: 1024px;
+		margin: 0 auto 3em auto;
+		z-index: 10;
+	}
+	#disqus_thread{
+		max-width: 1024px;
+		margin: 0 auto 3em auto;
+	}
+
+}
+
+/* screen reader elements, taken from twitter bootstrap */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}

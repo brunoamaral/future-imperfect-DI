@@ -1,0 +1,40 @@
+{{ partial "header.html" . }}
+	<body class="single page">
+	{{ partial "googletagmanager.html" }}
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				{{ partial "top_navigation.html" . }}
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">{{ .Title }}</a></h2>
+										{{ with .Params.subtitle }}
+										<p>{{ . }}</p>
+										{{ end }}
+									</div>
+								</header>
+								{{ with .Params.featured_image }}
+								<span class="image featured"><img src="{{ . }}" alt="" /></span>
+								{{ end }}
+								<section class="article-body">
+								{{range where (where .Site.Pages.ByDate.Reverse "Type" "!=" "page") ".Params.unlisted" "=" true }} {{ .Render "summary"}} {{ end }}
+
+
+								</section>
+
+							</article>
+
+					</div>
+
+
+
+			</div>
+			{{ partial "footer-links.html" . }}
+{{ partial "footer.html" . }}

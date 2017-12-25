@@ -1,0 +1,26 @@
+<!-- Pagination -->
+
+<!-- 
+We are checking if the user is on the homepage to see which pagination link to show him.
+If he's on the homepage, we direct him to the section that lists all posts.
+
+It's an ugly hack, I'm sorry. :( 
+-->
+{{ if or .Paginator.HasPrev .Paginator.HasNext }}
+	<ul class="actions pagination">
+	{{ if .Paginator.HasPrev }}
+		<li><a href="{{ .Paginator.Prev.URL | relLangURL }}" class="button big previous">{{ i18n "newer_posts" }}</a></li>
+	{{ else }}
+		<li><a href="#" class="disabled button big previous">{{ i18n "newer_posts" }}</a></li>
+	{{ end }}
+	{{ if .Paginator.HasNext }}
+		{{ if .IsHome }}
+			<li><a href="{{ .LanguagePrefix }}/post/page/1" class="button big next">{{ i18n "older_posts" }}</a></li>
+		{{ else }}
+			<li><a href="{{ .Paginator.Next.URL | relLangURL }}" class="button big next">{{ i18n "older_posts" }}</a></li>
+		{{ end }}
+	{{ else }}
+		<li><a href="#" class="disabled button big next">{{ i18n "older_posts" }}</a></li>
+	{{ end }}
+	</ul>
+{{ end }}

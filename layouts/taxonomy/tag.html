@@ -1,0 +1,26 @@
+{{ partial "header.html" . }}
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				{{ partial "top_navigation.html" . }}
+
+				<!-- Main -->
+					<div id="main">
+
+						<section id="category-list">
+							<div class="mini-posts">
+							{{range (.Paginate ( where (where .Data.Pages "Type" "post") ".Params.unlisted" "!=" true) 9).Pages}}					{{ .Render "summary"}}
+							{{ end }}
+							</div>
+						</section>
+
+						<div class="spacer"></div>
+
+						{{ partial "pagination.html" . }}
+					</div>
+
+		</div>
+		{{ partial "footer-links.html" . }}
+	{{ partial "footer.html" . }}

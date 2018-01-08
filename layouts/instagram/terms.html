@@ -1,5 +1,5 @@
 {{ partial "header.html" . }}
-	<body>
+	<body class="instagram terms terms-html">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -14,11 +14,10 @@
 						<div class="12u$">
 						<h1 class="center-text">{{ .Title | humanize }}</h1>
 							<section id="category-list">
-								<div class="mini-posts">
-									{{ $loopCategory := (.Paginate (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) 9).Pages }}
-								{{range $loopCategory }}
-									{{ .Render "summary"}}
-								{{ end }}
+								<div class="mini-posts">???
+									{{ range .Data }}
+										{{ .Render "summary"}}
+									{{ end }}
 								</div>
 							</section>
 						</div>

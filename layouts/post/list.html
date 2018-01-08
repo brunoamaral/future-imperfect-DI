@@ -1,5 +1,5 @@
 {{ partial "header.html" . }}
-	<body>
+	<body class="post-list post-list-html">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -8,14 +8,15 @@
 
 				<!-- Main -->
 					<div id="main">
-					{{ partial "title_section.html" . }}
+					{{ partial "title_section.html" . }} 
 
 					<div class="row">
 						<div class="12u$">
 
 							<section id="category-list">
 								<div class="mini-posts">
-								{{range (.Paginate (where (where .Site.Pages.ByDate.Reverse "Type" "!=" "page") ".Params.unlisted" "!=" true )  9).Pages }}
+									{{ $loop := (.Paginate (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) 9).Pages }}
+								{{range $loop }}
 									{{ .Render "summary"}}
 								{{ end }}
 								</div>

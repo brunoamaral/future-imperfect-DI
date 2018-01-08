@@ -8,6 +8,7 @@ layout: post
 slug:
 stories:
 subtitle: 
+tags: [""]
 title: {{ replace .TranslationBaseName "-" " " | title }}
 unlisted: false
 ---

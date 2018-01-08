@@ -1,16 +1,7 @@
 {{ $baseurl := .Site.BaseURL }}
 <!-- Mini Post -->
 <article class="mini-post">
-	<header><a href="{{ .Permalink }}">
-		<h3>{{ .Title }}</h3>
-		<time class="published" datetime="{{ .Date.Format "2006-01-02T15:04:05" }}">{{ .Date.Format "January 2, 2006" }}</time>
-		{{ if .Params.author }}
-		{{ if .Params.avatar }}<img src="{{ .Site.BaseURL }}images/avatar_{{ .Params.avatar }}.jpg" alt="{{ .Params.author }}" class="author" /> {{ else }}<img src="{{ .Site.BaseURL }}images/avatar_bruno.jpg" alt="{{ .Params.author }}" class="author" />{{ end }}
-		{{ else }}
-
-		{{ end }}
-		<p class="readingtime">{{ .ReadingTime }} min read</p>
-	</a></header>
+	
 	{{ if .Params.featured_image }}
 		<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image mini-featured-image">
 		{{ if eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }}

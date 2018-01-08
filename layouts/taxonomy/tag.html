@@ -8,13 +8,21 @@
 
 				<!-- Main -->
 					<div id="main">
+						{{ partial "title_section.html" . }}
 
-						<section id="category-list">
-							<div class="mini-posts">
-							{{range (.Paginate ( where (where .Data.Pages "Type" "post") ".Params.unlisted" "!=" true) 9).Pages}}					{{ .Render "summary"}}
-							{{ end }}
+						<div class="row">
+							<div class="12u$">
+								<h1 class="center-text">{{ .Title | humanize }}</h1>
+								<section id="category-list">
+									<div class="mini-posts">
+									{{ $loopTag := (.Paginate (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) 9).Pages }}
+									{{range $loopTag }}					
+										{{ .Render "summary"}}
+									{{ end }}
+									</div>
+								</section>
 							</div>
-						</section>
+						</div>
 
 						<div class="spacer"></div>
 

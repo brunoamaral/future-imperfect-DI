@@ -1,5 +1,5 @@
 {{ partial "header.html" . }}
-	<body>
+	<body class="list-html">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -12,11 +12,11 @@
 
 					<div class="row">
 						<div class="12u$">
-						<h1 class="center-text">{{ .Title | humanize }}</h1>
+
 							<section id="category-list">
 								<div class="mini-posts">
-									{{ $loopCategory := (.Paginate (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) 9).Pages }}
-								{{range $loopCategory }}
+									{{ $loop := (.Paginate (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) 9).Pages }}
+								{{range $loop }}
 									{{ .Render "summary"}}
 								{{ end }}
 								</div>

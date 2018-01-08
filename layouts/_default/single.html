@@ -1,5 +1,5 @@
 {{ partial "header.html" . }}
-	<body class="single">
+	<body class="single single-html">
 	{{ partial "googletagmanager.html" }}
 		<!-- Wrapper -->
 		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ if (not (isset .Params "featured_image")) }}{{ .Params.featured_image }}{{ else }}/images/fractal_full.png{{ end }}') 100% no-repeat / cover;"></div>

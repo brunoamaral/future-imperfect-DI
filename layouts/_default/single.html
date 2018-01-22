@@ -1,8 +1,9 @@
 {{ partial "header.html" . }}
-	<body class="single single-html">
+{{ $baseUrl := .Site.BaseURL }}
+	<body class="single post">
 	{{ partial "googletagmanager.html" }}
 		<!-- Wrapper -->
-		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ if (not (isset .Params "featured_image")) }}{{ .Params.featured_image }}{{ else }}/images/fractal_full.png{{ end }}') 100% no-repeat / cover;"></div>
+		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ with .Params.featured_image }}{{ . }}{{ else }}/images/fractal_full.png{{ end }}') 100% no-repeat / cover;"></div>
 			<div id="wrapper">
 
 				{{ partial "top_navigation.html" . }}
@@ -26,7 +27,7 @@
 										{{ else }}
 											<a href="/about/me" title="{{ .Site.Params.authors.Bruno.name }}" class="author"><img src="{{ .Site.BaseURL }}images/avatar_bruno.jpg" alt="" /></a>
 										{{ end }}
-										<p class="readingtime">{{ .ReadingTime }} {{ i18n "reading_time" }}</p>
+										<p class="readingtime">{{ .ReadingTime }} min read</p>
 										{{ if .IsTranslated }} Translations:
 										    {{ range .Translations }}
 										        <a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a>
@@ -34,17 +35,20 @@
 										{{ end }}
 									</div>
 								</header>
-								<span class="image featured"><img src="{{ .Params.featured_image }}" alt="" itemprop="image" class="cover" /></span>
-								<section class="article-body">
-									{{ .Content }}
-								</section>
+								<span class="image featured"><img src="{{ .Params.featured_image }}" alt="" itemprop="image" /></span>
+								<section class="article-body">{{ .Content }}</section>
 								<footer>
 									<ul class="stats">
 
 							{{ if isset .Params "categories" }}
-								{{ $baseUrl := .Site.BaseURL }}
 								{{ range $index, $category := .Params.categories }}
 									<li><a href="{{ $baseUrl }}categories/{{ $category | urlize }}" class="">{{ $category }}</a></li>
+								{{ end }}
+							{{ end }}
+
+							{{ if isset .Params "stories" }}
+								{{ range $index, $story := .Params.stories }}
+									<li><a href="{{ $baseUrl }}stories/{{ $story | urlize }}" class="">{{ $story }}</a></li>
 								{{ end }}
 							{{ end }}
 
@@ -53,17 +57,26 @@
 							</article>
 
 					</div>
-					{{ if .Params.stories }}
-					<section id="category-list">
-					<h3>Chapters</h3>
+					{{ if .Params.stories }} 
+					
+					{{ $name_url := index .Params.stories 0 | urlize }}
+					{{ $this := $.Site.GetPage "taxonomy" "stories" $name_url }}
 
-						<div class="mini-posts">
-						{{ $name := index .Params.stories 0 }}
-						{{ $name_url := $name | urlize }}
-						{{ $stories := index .Site.Taxonomies.stories $name }}
-						{{ range $stories.Pages }}
+					<section id="category-list">
+				
+  
+						<h2>{{ $this.Params.story_title }}</h2>
+
+						<h3>{{ $this.Params.story_subtitle}}</h3>
+
+						<p>Select one of the chapters</p>
+
+						<div class="mini-posts"> 
+
+						{{ range (index .Site.Taxonomies.stories $name_url ) }}
 							{{ .Render "summary" }}
 						{{end}}
+
 						</div>
 					</section>
 					{{end}} 
@@ -72,8 +85,6 @@
 
 					<a name="comments"></a>
 					{{ template "_internal/disqus.html" . }}
-
-
 
 			</div>
 			{{ partial "footer-links.html" . }}

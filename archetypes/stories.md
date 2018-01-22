@@ -3,8 +3,7 @@ categories: [""]
 date: {{ .Date }}
 description: ""
 draft: false
-featured_image: /stories/{{ getenv "STORY" }}/
-layout: post
+featured_image: /stories/{{ getenv "STORY" }}/{{ getenv "DATE" }}/
 slug:
 stories: ["{{ getenv "STORY" }}"]
 subtitle: 

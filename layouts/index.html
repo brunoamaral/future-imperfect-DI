@@ -10,10 +10,10 @@
 					<div id="main">
 						{{ partial "title_section.html" . }}
 
-						{{ $loop := (.Paginate (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) 1).Pages }}
+						{{ $loop := (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) }}
 
 						{{ partial "highlighted_stories.html" . }}
-						{{ range $loop }}
+						{{ range first 1 $loop }}
 							{{ .Render "li" }}
 						{{ end }}
 

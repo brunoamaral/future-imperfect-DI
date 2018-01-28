@@ -12,14 +12,11 @@
 
 								</header>
 
-
 									{{ if .Params.featured_image }}
 									<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image featured"><img src="{{ .Params.featured_image }}" alt="{{ .Title }}" /></a>
 									{{ else }}
 									<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image featured"><img src="{{ .Site.BaseURL }}images/fractal_thumb.png" alt="{{ .Title }}" /></a>
 									{{ end }}
-
-
 
 									<p>{{ .Summary }}</p>
 								<footer>

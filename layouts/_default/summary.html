@@ -10,16 +10,16 @@
 
 		{{ end }}
 		<p class="readingtime">{{ .ReadingTime }} min read</p>
-	</a></header>
-	{{ if .Params.featured_image }}
+	</a>
+	</header>
 		<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image mini-featured-image">
-		{{ if eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }}
-			<img src="{{ .Params.featured_image }}" alt="" />
-		{{ else }}
-			<img src="{{ .Params.featured_image | replaceRE ".jpg|.jpeg|.JPG" "_500.jpg" }}" alt="" />
-		{{ end }}
+			{{ with .Resources.GetMatch "header" }}
+				{{ $cover := . }}
+				{{ $image := $cover.Fill "430x150" }} 
+				<img src="{{ with $image }}{{ $image.RelPermalink }}{{ else }}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{ end }}" alt="{{ $image.Name }}" />
+			{{ else }}
+				<img src="{{ .Site.BaseURL }}images/fractal_thumb.jpg" alt="header" />
+			{{ end }}
 		</a>
-	{{ else }}
-	<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image mini-featured-image"><img src="{{ .Site.BaseURL }}images/fractal_thumb.png" alt="" /></a>
-	{{ end }}
+
 </article>

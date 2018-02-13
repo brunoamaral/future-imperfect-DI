@@ -8,7 +8,11 @@ License: pixelarity.com/license
 {{ $timeNow := now.Format "20060102" }}
 <html lang="{{ .Lang }}">
 <head>
-	<title>{{ .Site.Title }}{{ with .Title }}-{{ . | humanize }}{{ end }}{{ with .Params.story_title }}-{{ . }}{{ end }}</title>
+	{{ if .IsHome }}
+	<title>Bruno's Digital Insanity</title>
+	{{ else }}
+	<title>{{ .Site.Title }}{{ with .Title }} - {{ . | humanize }}{{ end }}{{ with .Params.story_title }}-{{ . }}{{ end }}</title>
+	{{ end }}
 	{{ .Hugo.Generator }}
 	<meta charset="utf-8" />
 	{{ if isset .Params "unlisted" }}
@@ -43,23 +47,28 @@ License: pixelarity.com/license
 	<meta property="og:site_name" content="{{ .Site.Title }} by Bruno Amaral" />
 
 	{{ if .IsHome }}
-	<meta property="og:image" content="{{ .Site.BaseURL}}images/logo.png" />
+		<meta name="description" content="A blog by Bruno Amaral : Sharing ideas and knowledge on Digital Strategy, marketing and communication" />
+		<meta property="og:image" content="{{ .Site.BaseURL}}images/logo.png" />
 	{{ else }}
-	{{ with .Params.featured_image }}
-	<meta property="og:image" content="{{ . | absURL }}" />
-	{{ else }}
-	{{ with .Params.story_featured_image }}
-	<meta property="og:image" content="{{ . | absURL }}" />
-	{{else}}
-	{{ with .Params.images }}
-		{{ range first 6 . }}
-	<meta property="og:image" content="{{ . | absURL }}" />
+
+	{{ if and (.Section) (ne .IsPage true) }}
+		{{ with .Resources.GetMatch "sectionHeader" }}
+			{{ $cover := . }}
+			{{ $image := $cover.Fill "500x500" }} 
+			<meta property="og:image" content="{{ with $image }}{{ $image.Permalink }}{{ else }}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{ end }}" />
 		{{ end }}
-	{{ else }}
-	<meta property="og:image" content="{{ .Site.BaseURL }}images/fractal_thumb.png" />
+	{{end}}
+
+	{{ if .IsPage }}
+		{{ with .Resources.GetMatch "header" }}
+			{{ $cover := . }}
+			{{ $image := $cover.Fill "500x500" }} 
+			<meta property="og:image" content="{{ with $image }}{{ $image.Permalink }}{{ else }}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{ end }}" />
+		{{ else }}
+			<meta property="og:image" content="{{ .Site.BaseURL }}images/fractal_thumb.jpg" />
+		{{ end }}
 	{{ end }}
-	{{ end }}
-	{{ end }}
+
 	{{ end }}
 	{{ if not .Date.IsZero }}<meta property="og:updated_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}"/>{{ end }}
 {{ with .Params.audio }}<meta property="og:audio" content="{{ . }}" />{{ end }}

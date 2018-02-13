@@ -3,7 +3,7 @@
 	<body class="single post">
 	{{ partial "googletagmanager.html" }}
 		<!-- Wrapper -->
-		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ with .Params.featured_image }}{{ . }}{{ else }}/images/fractal_full.png{{ end }}') 100% no-repeat / cover;"></div>
+		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ with .Resources.GetMatch "header" }}{{ .RelPermalink }}{{else}}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{end}}') 100% no-repeat / cover;"></div>
 			<div id="wrapper">
 
 				{{ partial "top_navigation.html" . }}
@@ -35,7 +35,7 @@
 										{{ end }}
 									</div>
 								</header>
-								<span class="image featured"><img src="{{ .Params.featured_image }}" alt="" itemprop="image" /></span>
+								<span class="image featured"><img src="{{ with .Resources.GetMatch "header" }}{{ .RelPermalink }}{{end}}" alt="" itemprop="image" /></span>
 								<section class="article-body">{{ .Content }}</section>
 								<footer>
 									<ul class="stats">

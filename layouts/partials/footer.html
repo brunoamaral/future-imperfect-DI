@@ -1,32 +1,33 @@
 		<!-- Scripts -->
-			<script src="{{ .Site.BaseURL }}assets/js/jquery.min.js"></script>
-			<script src="{{ .Site.BaseURL }}assets/js/skel.min.js"></script>
-			<script src="{{ .Site.BaseURL }}assets/js/skel-layout.min.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/skel-layout.min.js"></script>
+			<script src="/assets/js/custom.js"></script>
 			{{ if eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }}
-			<script src="{{ .Site.BaseURL }}assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="{{ .Site.BaseURL }}assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="{{ .Site.BaseURL }}assets/js/main.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
 			{{ else }}
-			<script src="{{ .Site.BaseURL }}assets/js/util-min.js"></script>
-			<!--[if lte IE 8]><script src="{{ .Site.BaseURL }}assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="{{ .Site.BaseURL }}assets/js/main-min.js"></script>
+			<script src="/assets/js/util-min.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main-min.js"></script>
 			{{ end }}
 			<script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch-preact.min.js"></script>
 			{{ if eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }}
-			<script src="{{ .Site.BaseURL }}assets/js/classie.js"></script>
-			<script src="{{ .Site.BaseURL }}assets/js/search.js"></script>
+			<script src="/assets/js/classie.js"></script>
+			<script src="/assets/js/search.js"></script>
 			{{ if .IsPage }}
-			<script src="{{ .Site.BaseURL }}assets/js/reader.js"></script>
+			<script src="/assets/js/reader.js"></script>
 			{{ end }}
 			{{ else }}
-			<script src="{{ .Site.BaseURL }}assets/js/classie-min.js"></script>
-			<script src="{{ .Site.BaseURL }}assets/js/search-min.js"></script>
+			<script src="/assets/js/classie-min.js"></script>
+			<script src="/assets/js/search-min.js"></script>
 			{{ if .IsPage }}
-			<script src="{{ .Site.BaseURL }}assets/js/reader-min.js"></script>
+			<script src="/assets/js/reader-min.js"></script>
 			{{ end }}
 			{{ end }}
-			<script src="{{ .Site.BaseURL }}assets/js/velocity/velocity.min.js"></script>
-			<script src="{{ .Site.BaseURL }}assets/js/animation.js"></script>
+			<script src="/assets/js/velocity/velocity.min.js"></script>
+			<script src="/assets/js/animation.js"></script>
 			<script type="application/ld+json">
 			{ "@context": "http://schema.org", 
 			{{ if .IsHome }}
@@ -41,7 +42,13 @@
 				},
 			"headline": "{{ .Title }}",
 			{{ with .Params.subtitle }}"alternativeHeadline": "{{ . }}",{{ end }}
-			"image": "{{ if .IsHome }}{{ .Site.BaseURL}}images/logo.png{{ else }}{{ with .Params.featured_image }}{{ . | absURL }} {{ else }}{{ with .Params.story_featured_image }}{{ . | absURL }} {{else}}{{ with .Params.images }}{{ range first 1 . }}{{ . | absURL }}{{ end }}{{ else }}{{ .Site.BaseURL }}images/fractal_thumb.png{{ end }}{{ end }}{{ end }}{{ end }}",
+			"image": "{{- if .IsHome -}}
+						{{ .Site.BaseURL}}images/logo.png
+						{{- else -}}
+							{{- with $.Page.Resources.GetMatch "header" -}}
+							{{ .Permalink }}
+						{{- end -}}
+						{{- end -}}",
 			"author": {
 			   "@type": "Person",
 			   "name": "Bruno Amaral"
@@ -53,7 +60,7 @@
 			 "name": "Bruno Amaral",
 			 "logo": {
 			   "@type": "ImageObject",
-			   "url": "https://brunoamaral.eu/images/digital_insanity_logo.svg",
+			   "url": "{{ .Site.BaseURL }}images/digital_insanity_logo.svg",
 			   "height": 60
 			 }
 			},
@@ -61,9 +68,10 @@
 			"datePublished": "{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}{{ end }}",
 			"dateCreated": "{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}{{ end }}",
 			"dateModified": "{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}{{ end }}",
-			"description": "{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Summary }}{{ end }}",
+			"description": "{{ if .Params.description }}{{ .Params.description | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}",
 			"articleBody": "{{ .Plain  }}"
 			}
 			</script>
+
 		</body>
 </html>

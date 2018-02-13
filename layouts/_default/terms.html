@@ -23,7 +23,7 @@
 									{{ with .Params.story_subtitle }} <p>{{ . }}</p>{{ end }}
 								
 								</header>
-								<a href="{{ .Permalink }}" class="image mini-featured-image" {{ if eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }} style="background-image: url('{{ .Params.story_featured_image }}'); background-position: 40% 40%;" {{ else }} style="background-image: url('{{ .Params.story_featured_image | replaceRE ".jpg|.jpeg|.JPG" "_500.jpg" }}'); background-position: 40% 40%;" {{ end }} ><h3 style="background-color: rgba(255,255,255,0.7)">{{  .Params.story_title }}</h3></a>
+								<a href="{{ .Permalink }}" class="image mini-featured-image" style="background-image: url('{{ with .Resources.GetMatch "sectionHeader" }}{{ $cover := . }}{{ $image := $cover.Fill "430x150" }}{{ $image.RelPermalink }}{{end}}'); background-position: 40% 40%;"><h3 style="background-color: rgba(255,255,255,0.7)">{{  .Params.story_title }}</h3></a>
 							</article>
 
 						{{ end }}

@@ -1,3 +1,15 @@
+#header > nav.links > ul > li > a.active{
+	font-weight: bold;
+}
+#category-list article.mini-post > a.image{
+	height: 150px;
+}
+body.instagram #category-list article.mini-post>a.image{
+	height: 100%;
+}
+h3.card-story-title{
+	background-color: rgba(255,255,255,0.7);
+}
 video{
 	width: 100%;
 	height: auto;

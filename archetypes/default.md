@@ -1,13 +1,14 @@
 ---
-categories: [""]
 date: {{ .Date }}
 description: ""
 draft: false
-featured_image: /post/
+resources: 
+- src: 
+  name: "header"
 slug:
 stories:
 subtitle: 
 tags: [""]
-title: {{ replace .TranslationBaseName "-" " " | title }}
+title: "{{ replace .Name "-" " " | title }}"
 unlisted: false
 ---

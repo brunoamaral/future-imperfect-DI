@@ -8,6 +8,14 @@
     "translation": "Newer Posts"
   },
   {
+    "id": "older_photos",
+    "translation": "Older Photos"
+  },
+  {
+    "id": "newer_photos",
+    "translation": "Newer Photos"
+  },
+  {
     "id":"categories",
     "translation":"Categories"
   },

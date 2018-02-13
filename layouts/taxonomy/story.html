@@ -16,7 +16,10 @@
 							</div>
 						</header>
 						<section>
-						<div class="full-width" style="background: no-repeat center/cover url({{ .Site.BaseURL }}{{ .Params.story_featured_image }}); height: {{ with .Params.story_header_height }} {{ . }} {{ else  }} 200px{{ end }};"></div>
+							{{ with .Resources.GetMatch "sectionHeader" }}
+													{{ $image := .Fill "900x600" }}
+						<div class="full-width" style="background: no-repeat center/cover url({{ $image.RelPermalink }}); height: {{ with $.Params.story_header_height }} {{ . }} {{ else  }} 200px{{ end }};"></div>
+						{{ end }}
 							<div class="row">
 								<div class="12u 12u$(medium)">
 								{{ .Params.story_description }}

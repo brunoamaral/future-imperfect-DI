@@ -1,0 +1,7 @@
+<article class="mini-post stories">
+	<header>
+		{{ with .Params.story_subtitle }} <p>{{ . }}</p>{{ end }}
+	
+	</header>
+	<a href="{{ .Permalink }}" class="image mini-featured-image" style="background-image: url('{{ with .Resources.GetMatch "sectionHeader" }}{{ $cover := . }}{{ $image := $cover.Fill "430x150" }}{{ $image.RelPermalink }}{{end}}'); {{ with .Params.story_style}} {{ . | safeCSS }} {{ end }}"><h3 style="background-color: rgba(255,255,255,0.7)">{{  .Params.story_title }}</h3></a>
+</article>

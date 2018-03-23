@@ -1,5 +1,5 @@
 {{ partial "header.html" . }}
-	<body class="single page">
+	<body class="single page contentgrouptype-{{ .Section }} contentgroupname-{{ .Title | urlize }}">
 	{{ partial "googletagmanager.html" }}
 
 		<!-- Wrapper -->
@@ -20,9 +20,13 @@
 										{{ end }}
 									</div>
 								</header>
-								{{ with .Params.featured_image }}
-								<span class="image featured"><img src="{{ . }}" alt="" /></span>
-								{{ end }}
+								
+								{{ with .Resources.GetMatch "header" }}
+								{{ $cover := . }}
+								{{ $image := $cover.Resize "1350x" }}
+								<span class="image featured"><img src="{{ $image.RelPermalink }}" alt="" /></span>
+								{{end}}
+								
 								<section class="article-body">{{ .Content }}</section>
 
 							</article>

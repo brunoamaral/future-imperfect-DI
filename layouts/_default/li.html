@@ -11,13 +11,11 @@
 									</div>
 
 								</header>
-
-									{{ if .Params.featured_image }}
-									<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image featured"><img src="{{ .Params.featured_image }}" alt="{{ .Title }}" /></a>
-									{{ else }}
-									<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image featured"><img src="{{ .Site.BaseURL }}images/fractal_thumb.png" alt="{{ .Title }}" /></a>
-									{{ end }}
-
+									
+									<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image featured"><img src="{{ with .Resources.GetMatch "header" }}
+										{{ $cover := . }}
+										{{ $image := $cover.Resize "1350x" }}{{ $image.RelPermalink }}{{else}}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{end}}" alt="{{ .Title }}" /></a>
+									
 									<p>{{ .Summary }}</p>
 								<footer>
 									{{ if .Truncated }}

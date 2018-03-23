@@ -1,6 +1,6 @@
 {{ partial "header.html" . }}
 
-<body class="terms">
+<body class="terms contentgrouptype-terms contentgroupname-the-stories article-title-subhomepage">
 {{ partial "googletagmanager.html" }}
 		<!-- Wrapper -->
 		<div id="wrapper">
@@ -16,16 +16,8 @@
 						{{ $baseurl := .Site.BaseURL }}
 
 						{{ $stories := where (where .Site.Pages "Section" "stories") ".Params.unlisted" "!=" true | intersect (where .Site.Pages "Params.story_published" "=" true)  }}
-
 						{{ range $stories }} 
-							<article class="mini-post stories">
-								<header>
-									{{ with .Params.story_subtitle }} <p>{{ . }}</p>{{ end }}
-								
-								</header>
-								<a href="{{ .Permalink }}" class="image mini-featured-image" {{ if eq (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }} style="background-image: url('{{ .Params.story_featured_image }}'); background-position: 40% 40%;" {{ else }} style="background-image: url('{{ .Params.story_featured_image | replaceRE ".jpg|.jpeg|.JPG" "_500.jpg" }}'); background-position: 40% 40%;" {{ end }} ><h3 style="background-color: rgba(255,255,255,0.7)">{{  .Params.story_title }}</h3></a>
-							</article>
-
+						{{ partial "story-card.html" . }}
 						{{ end }}
 						</div>
 					</section>

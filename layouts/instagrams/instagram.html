@@ -1,0 +1,81 @@
+{{ partial "header.html" . }}
+{{ $baseUrl := .Site.BaseURL }}
+	<body class="single instagram contentgrouptype-instagrams contentgroupname-{{ .URL }}" id="instagram">
+	{{ partial "googletagmanager.html" }}
+		<!-- Wrapper -->
+		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ with .Resources.GetMatch "header" }}
+										{{ $cover := . }}
+										{{ $image := $cover.Resize "1350x" }}{{ $image.RelPermalink }}{{else}}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{end}}') 100% no-repeat / cover;"></div>
+			<div id="wrapper">
+
+				{{ partial "top_navigation.html" . }}
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<section class="article-body">{{ .Content }}</section>
+
+									<ul class="actions pagination">
+									{{ if .PrevInSection }}
+										<li><a href="{{ .PrevInSection.URL | relLangURL }}" class="button big previous">{{ i18n "older_photos" }}</a></li>
+									{{ else }}
+										<li><a href="#" class="disabled button big previous">{{ i18n "older_photos" }}</a></li>
+									{{ end }}
+									{{ if .NextInSection }}
+											<li><a href="{{ .NextInSection.URL | relLangURL }}" class="button big next">{{ i18n "newer_photos" }}</a></li>
+									{{ else }}
+											<li><a href="#" class="disabled button big next">{{ i18n "newer_photos" }}</a></li>
+									{{ end }}
+									</ul>
+
+								<footer>
+									<ul class="stats">
+
+									<li><a href="{{ $baseUrl }}instagram" class="">instagram</a></li>
+
+									{{ if isset .Params "stories" }}
+										{{ range $index, $story := .Params.stories }}
+											<li><a href="{{ $baseUrl }}stories/{{ $story | urlize }}" class="">{{ $story }}</a></li>
+										{{ end }}
+									{{ end }}
+
+									</ul>
+								</footer>
+							</article>
+
+					</div>
+					{{ if .Params.stories }} 
+					<section id="category-list">
+						{{ range $index, $story := .Params.stories }}
+						<h2>{{ $story }}</h2>
+						{{ end }}
+						<p>Read the full story by selecting one of the chapters</p>
+
+						<div class="mini-posts"> 
+						{{ $name := index .Params.stories 0 }}
+						{{ $name_url := $name | urlize }}
+  
+						{{ range $key, $taxonomy := .Site.Taxonomies.stories  }}
+
+							{{ if eq $key $name_url }} 
+								{{ range $taxonomy.Pages }}
+								{{ .Render "summary" }}
+								{{ end }}
+							{{end}}
+
+						{{end}}
+
+						</div>
+					</section>
+					{{end}} 
+
+					{{ partial "pagination.html" }}
+
+					<a name="comments"></a>
+					{{ template "_internal/disqus.html" . }}
+
+			</div>
+			{{ partial "footer-links.html" . }}
+{{ partial "footer.html" . }}

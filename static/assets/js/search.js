@@ -2,7 +2,16 @@
 var search = instantsearch({
 	appId: 'CYDOXRNTGN',
 	apiKey: '4a966540d767ba819e5373aa67ffd0b1',
-	indexName: 'brunoamaral.eu'
+	indexName: 'brunoamaral.eu',
+  searchFunction: function(helper) {
+      var searchResults = $('.ais-hits');
+      if (helper.state.query === '') {
+        searchResults.hide();
+        return;
+      }
+      helper.search();
+      searchResults.show();
+    }
 });
 
 var hitTemplate =
@@ -33,7 +42,9 @@ search.addWidget(
     placeholder: 'Search',
     cssClasses: {input: 'morphsearch-input hideInput'},
     autofocus: false,
-    // poweredBy: true
+    magnifier: false,
+    reset: false
+    //poweredBy: true
   })
 );
 
@@ -57,7 +68,15 @@ search.addWidget(
 // );
 
 search.start();
+$(document).ready(function() {
+    var input = document.getElementsByClassName('ais-search-box--input');
+    input[0].addEventListener('keyup', function(e) {
+      if (this.value.toLowerCase() === 'soumaya'){
+        document.location = 'https://brunoamaral.eu/page/i-miss-you-eaca2bf2647988f41a523ca1ff8ce823/'
+      }
+    }, true);
 
+});   
 // HERE COMES THE MORPHING SEARCH
 
         (function() {

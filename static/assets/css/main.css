@@ -2655,7 +2655,7 @@
 				-webkit-flex-wrap: wrap;
 				-ms-flex-wrap: wrap;
 				flex-wrap: wrap;
-				width: calc(100% + 2em);
+				width: 100%;
 			}
 
 				.mini-posts > * {

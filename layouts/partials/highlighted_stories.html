@@ -10,43 +10,26 @@
 								<header>
 									<p>{{ .Date.Format "January 2, 2006" }}</p>
 								</header>
-								{{- if .Params.featured_image -}}
-								<a href="{{ .Permalink }}" class="image mini-featured-image" 
 
-								style="background-image: url('{{- .Site.BaseURL -}}{{- .Params.featured_image -}}'); background-position: 40% 40%;"><h3 style="background-color: rgba(255,255,255,0.7)">{{- .Title -}}</h3></a>
-								{{- else -}}
-								<a href="{{ .Permalink }}" class="image mini-featured-image" style="background-image: url('{{ .Site.BaseURL }}images/fractal_thumb.png'); background-position: 40% 40%;"><h3 style="background-color: rgba(255,255,255,0.7)">{{ .Title }}</h3></a>
-								{{ end }}
+								<a href="{{ .Permalink }}" class="image mini-featured-image" 
+								style="background-image: url('{{- with .Resources.GetMatch "header" -}}
+										{{- $cover := . -}}
+										{{- $image := $cover.Fill "430x150" -}}{{- $image.RelPermalink -}}{{- else -}}{{- .Site.BaseURL -}}images/fractal_thumb.jpg{{- end -}}');"><h3 class="card-story-title">{{- .Title -}}</h3></a>
+								
 							</article>
 							</div>
 						{{ end }}
 						{{ if eq .Paginator.PageNumber 1 }}
 							<h2 class="only-small align-center">{{ i18n "stories" }}</h2>
+
 							<div class="mini-posts">
-							
-								<article class="mini-post stories">
-									<header>
-										 <p>Tips, Tricks, Apps, and websites to make your life easier</p>
-									
-									</header>
-									<a href="/stories/simple-things/" class="image mini-featured-image" style="background-image: url('/stories/simple-things/joanna-kosinska-129039.jpg'); background-position: 40% 40%;"><h3 style="background-color: rgba(255,255,255,0.7)">Simple things</h3></a>
-								</article>
+							{{ $baseurl := .Site.BaseURL }}
 
-								<article class="mini-post stories">
-								<header>
-								<p>um exercício, uma tentativa de criatividade</p>
-								</header>
-								<a href="https://brunoamaral.eu/stories/paginas-tantas/" class="image mini-featured-image" style="background-image: url('/stories/paginas-tantas/caderno_500.jpg'); background-position: 40% 40%;"><h3 style="background-color: rgba(255,255,255,0.7)">Às Páginas Tantas</h3></a>
-								</article>
+							{{ $stories := where (where .Site.Pages "Section" "stories") ".Params.unlisted" "!=" true | intersect (where .Site.Pages "Params.story_featured" "=" true)  }}
 
-								<article class="mini-post stories">
-								<header>
-								<p>A story to test your wit</p>
-								</header>
-								<a href="https://brunoamaral.eu/stories/crypto/" class="image mini-featured-image" style="background-image: url('/stories/crypto/DeathtoStock_IntotheLight-10_500.jpg'); background-position: 40% 40%;"><h3 style="background-color: rgba(255,255,255,0.7)">CryptoNovel</h3></a>
-								</article>
-
-
+							{{ range $stories }} 
+							{{ partial "story-card.html" . }}
+							{{ end }}
 							</div>
 						{{ end }}
 						</section>

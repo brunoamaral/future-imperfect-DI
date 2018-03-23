@@ -14,11 +14,17 @@
   "newer_posts": {
     "other": "Artigos mais recentes"
   },
+  "newer_photos": {
+    "other": "Fotos recentes"
+  },
   "reading_time": {
     "other": "min de leitura"
   },
   "older_posts": {
     "other": "Artigos mais antigos"
+  },
+  "older_photos": {
+    "other": "Fotos anteriores"
   },
   "related_links":{
     "other":"Links relacionados"

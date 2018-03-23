@@ -1,13 +1,18 @@
 ---
-categories: [""]
 date: {{ .Date }}
 description: ""
 draft: false
-featured_image: /post/
+resources: 
+- src: images/
+  name: "header"
+- src: "gallery/*.jpg"
+  name: gallery-:counter
+  title: gallery-title-:counter
 slug:
 stories:
 subtitle: 
 tags: [""]
-title: {{ replace .TranslationBaseName "-" " " | title }}
+categories: [""]
+title: "{{ replace (getenv "SLUG") "-" " " | title }}
 unlisted: false
 ---

@@ -15,7 +15,7 @@ It's an ugly hack, I'm sorry. :(
 	{{ end }}
 	{{ if .Paginator.HasNext }}
 		{{ if .IsHome }}
-			<li><a href="{{ .LanguagePrefix }}/post/page/1" class="button big next">{{ i18n "older_posts" }}</a></li>
+			<li><a href="{{ .LanguagePrefix }}/articles/" class="button big next">{{ i18n "older_posts" }}</a></li>
 		{{ else }}
 			<li><a href="{{ .Paginator.Next.URL | relLangURL }}" class="button big next">{{ i18n "older_posts" }}</a></li>
 		{{ end }}

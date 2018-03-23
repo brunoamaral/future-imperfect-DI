@@ -1,9 +1,75 @@
+#main > article > header h2{
+	text-align: center;
+}
+#header > nav.links > ul > li > a.active{
+	font-weight: bold;
+	border-bottom: 2px solid rgba(46,186,174,0.65);
+	padding-bottom: 16px;
+}
+#category-list article.mini-post > a.image{
+	height: 150px;
+}
+body.instagram #category-list article.mini-post>a.image{
+	height: 100%;
+}
+h3.card-story-title{
+	background-color: rgba(255,255,255,0.7);
+}
 video{
 	width: 100%;
 	height: auto;
 }
 .center-text{
 	text-align: center;
+}
+
+/**/
+/* GALLERY */
+/**/
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+  .gallery {
+    column-count: 1;
+    column-gap: 3px;
+  }
+}
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .gallery {
+    column-count: 3;
+    column-gap: 3px;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .gallery { /* Masonry container */
+      column-count: 4;
+      column-gap: 3px;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .gallery{
+    column-count: 4;
+    column-gap: 3px;
+  }
+}
+
+
+.gallery-item { /* Masonry bricks or child elements */
+    background-color: #eee;
+    display: inline-block;
+    margin: 0 0 0em;
+    width: 100%;
+}
+
+/**/
+/* STORY HEADER */
+/**/
+body.subhomepage .post > header {
+	margin: -3em 0 0em 0;
 }
 /**/
 /* TYPOGRAPHY */
@@ -24,7 +90,9 @@ video{
 .body-subtitle{
 	font-weight: normal;
 }
-
+article.post p{
+	word-wrap: break-word;
+}
 article .text, section .text{
 	column-width: 25em;
 	column-gap: 5em;
@@ -39,13 +107,7 @@ a{
 /**/
 /* GALLERY */
 /**/
-#main .gallery figure {
-    width: 308px;
-    height: auto;
-    margin: 0 auto 0 auto;
-    padding: 1px 0px 1px 0px;
-    display: block;
-}
+
 
 /**/
 /* LAYOUT */
@@ -247,7 +309,7 @@ svg#svgLogo{
 	#large-background{
 		display: block;
 		width: 100%;
-		height: 100vh;
+		height: 95vh;
 		position: absolute;
 		top: 0;
 		left: 0;

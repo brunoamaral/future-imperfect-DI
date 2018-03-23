@@ -1,0 +1,16 @@
+{{ $baseurl := .Site.BaseURL }}
+<!-- Mini Post -->
+<article class="mini-post">
+	
+
+		<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image mini-featured-image">
+			{{ with .Resources.GetMatch "header" }}
+				{{ $cover := . }}
+				{{ $image := $cover.Fill "430x430" }} 
+				<img src="{{ with $image }}{{ $image.RelPermalink }}{{ else }}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{ end }}" alt="{{ $image.Name }}" />
+			{{ else }}
+				<img src="{{ .Site.BaseURL }}images/fractal_thumb.jpg" alt="header" />
+			{{ end }}
+		</a>
+
+</article>

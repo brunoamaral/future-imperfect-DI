@@ -1,0 +1,131 @@
+baseurl = "https://brunoamaral.eu/"
+disqusShortname = "brunoamaral-eu"
+googleAnalytics = ""
+languageCode = "en-us"
+preserveTaxonomyNames = false
+publishdir = "/var/web/"
+theme = "light"
+title = ""
+
+author_facebook=""
+
+[mediaTypes]
+	[mediaTypes."application/json"]
+	suffix = "json"
+
+
+[outputs]
+	home = [ "HTML", "RSS", "JSON" ]
+	section = [ "HTML", "RSS"]
+	taxonomy = [ "HTML", "RSS"]
+
+
+[permalinks]
+	post = "/post/:slug/"
+	story = "/stories/:sections/:slug"
+
+[sitemap]
+	changefreq = "weekly"
+	priority = 0.5
+	filename = "sitemap.xml"
+
+[taxonomies]
+	tag = "tags"
+	category = "categories"
+	story = "stories"
+
+[social]
+	facebook_admin = ""
+	facebook_app_id = ""
+
+DefaultContentLanguage = "en"
+
+[Languages]
+
+[Languages.en]
+weight = 1
+LanguageName = "English"
+
+[Languages.en.params]
+subtitle = ""
+description = ""
+algoliaappid = ""
+algoliaapikey = ""
+algoliaindex = ""
+
+[Languages.en.params.authors]
+[Languages.en.params.authors.Bruno]
+name = ""
+thumbnail = ""
+facebook = ""
+twitter = ""
+github = ""
+googleplus = "https://plus.google.com/u/0/+"
+bio = ""
+authorlink = "/page/the-author/"
+[Languages.en.params.authors.Joe]
+name = "Nothing joe"
+thumbnail = "joe.jpeg"
+facebook = "joe joe"
+twitter = "joe joe"
+github = "joe joe"
+bio = "I was joe before it was cool."
+
+[Languages.en.menu]
+
+[[Languages.en.menu.main]]
+name = "The Stories"
+url = "/categories/"
+weight = 2
+post = "Come sit by the table, have a drink and read a tale"
+
+
+[[Languages.en.menu.main]]
+name = "The Photos"
+url = "/instagrams/"
+weight = 4
+post = "Instagram"
+
+[Languages.pt]
+weight = 2
+LanguageName = "Portuguese"
+subtitle = "Contos de uma mente hiperactiva"
+
+[[Languages.pt.menu.main]]
+name = "As Histórias"
+url = "/pt/categories/"
+weight = 2
+post = "São mais do que estórias e menos do que histórias, mas contam mais do que contos."
+
+[[Languages.pt.menu.main]]
+name = "As Fotos"
+url = "/pt/instagrams/"
+weight = 4
+post = "Instagram"
+
+pygmentsOptions=""
+pygmentsCodefences=true
+pygmentsStyle="monokai"
+pygmentsUseClasses=true
+
+[imaging]
+# See https://github.com/disintegration/imaging
+# Imaging supports image resizing using various resampling filters. The most notable ones:
+
+# NearestNeighbor - Fastest resampling filter, no antialiasing.
+# Box - Simple and fast averaging filter appropriate for downscaling. When upscaling it's similar to NearestNeighbor.
+# Linear - Bilinear filter, smooth and reasonably fast.
+# MitchellNetravali - А smooth bicubic filter.
+# CatmullRom - A sharp bicubic filter.
+# Gaussian - Blurring filter that uses gaussian function, useful for noise removal.
+# Lanczos - High-quality resampling filter for photographic images yielding sharp results, but it's slower than cubic filters.
+resampleFilter = "lanczos"
+
+# Defatult JPEG quality setting. Default is 75.
+quality = 75
+
+# Anchor used when cropping pictures.
+# Default is "smart" which does Smart Cropping, using https://github.com/muesli/smartcrop
+# Smart Cropping is content aware and tries to find the best crop for each image.
+# Valid values are Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
+anchor = "smart"

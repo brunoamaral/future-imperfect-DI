@@ -13,6 +13,6 @@ stories:
 subtitle: 
 tags: [""]
 categories: [""]
-title: "{{ replace (getenv "SLUG") "-" " " | title }}
+title: "{{ replace (getenv "SLUG") "-" " " | title }}"
 unlisted: false
 ---

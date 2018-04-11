@@ -1,4 +1,5 @@
-#main > article > header h2{
+#main > article > header h2, 
+#main > article > header p{
 	text-align: center;
 }
 #header > nav.links > ul > li > a.active{
@@ -22,6 +23,93 @@ video{
 .center-text{
 	text-align: center;
 }
+
+/* Image */
+
+	.image {
+		border: 0;
+		display: inline-block;
+		position: relative;
+	}
+
+		.image img {
+			display: block;
+		}
+
+		.image.left, .image.right {
+			max-width: 60%;
+		}
+
+			.image.left img, .image.right img {
+				width: 100%;
+			}
+
+		.image.left {
+			float: left;
+			padding: 0 1.5em 1em 0;
+			top: 0.25em;
+		}
+
+		.image.right {
+			float: right;
+			padding: 0 0 1em 1.5em;
+			top: 0.25em;
+		}
+
+		.image.fit {
+			display: block;
+			margin: 0 0 2em 0;
+			width: 100%;
+		}
+
+			.image.fit img {
+				width: 100%;
+			}
+
+		.image.featured {
+			display: block;
+			margin: 0 -3em 2em -3em;
+			width: calc(100% + 6em);
+		}
+
+			.image.featured img {
+				width: 100%;
+			}
+
+			@media screen and (max-width: 736px) {
+
+				.image.featured {
+					margin: 0 0 1.5em 0;
+				}
+
+				.image.right, .image.left{
+					width: 70%;
+					max-width: 70%;
+
+				}
+
+			}
+			@media screen and (max-width: 425px) {
+				.image.right, .image.left, .image.center{
+					width: calc( 100% + 3em );
+					margin-left: -1.5em;
+					margin-right: -1.5em;
+					max-width: calc( 100% + 3em );
+					float: none;
+					padding:0;
+				}
+			}
+
+		.image.main {
+			display: block;
+			margin: 0 0 3em 0;
+			width: 100%;
+		}
+
+			.image.main img {
+				width: 100%;
+			}
+
 
 /**/
 /* GALLERY */

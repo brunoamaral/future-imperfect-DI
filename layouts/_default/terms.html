@@ -1,11 +1,11 @@
-{{ partial "header.html" . }}
+{{ define "main" }}
 
 <body class="terms contentgrouptype-terms contentgroupname-the-stories article-title-subhomepage">
-{{ partial "googletagmanager.html" }}
+{{ partialCached "googletagmanager.html" . }}
 		<!-- Wrapper -->
 		<div id="wrapper">
 
-				{{ partial "top_navigation.html" . }}
+				{{ partialCached "top_navigation.html" . }}
 
 				<!-- Main -->
 				<div id="main">
@@ -48,6 +48,6 @@
 				</div>
 
 		</div>
-		{{ partial "footer-links.html" . }}
+		
 
-		{{ partial "footer.html" . }}
+		{{ end }}

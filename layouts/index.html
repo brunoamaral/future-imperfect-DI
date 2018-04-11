@@ -1,19 +1,17 @@
-{{ partial "header.html" . }}
+{{ define "main" }}
 	<body>						
-
+	{{ partialCached "googletagmanager.html" . }}
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				{{ partial "top_navigation.html" . }}
+				{{ partialCached "top_navigation.html" . }}
 
 				<!-- Main -->
 					<div id="main">
-						{{ partial "title_section.html" . }}
-
-						{{ $loop := (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) }}
+						{{ partialCached "title_section.html" . }}
 
 						{{ partial "highlighted_stories.html" . }}
-						{{ range first 1 $loop }}
+						{{ range first 1 (where (where .Data.Pages "Type" "!=" "page") ".Params.unlisted" "!=" true ) }}
 							{{ .Render "li" }}
 						{{ end }}
 
@@ -22,6 +20,6 @@
 
 			</div>
 
-			{{ partial "footer-links.html" . }}
+			
 
-{{ partial "footer.html" . }}
+{{ end }}

@@ -1,14 +1,14 @@
-{{ partial "header.html" . }}
+{{ define "main" }}
 	<body class="instagram terms terms-html">
-
+		{{ partialCached "googletagmanager.html" . }}
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				{{ partial "top_navigation.html" . }}
+				{{ partialCached "top_navigation.html" . }}
 
 				<!-- Main -->
 					<div id="main">
-					{{ partial "title_section.html" . }}
+					{{ partialCached "title_section.html" . }}
 
 					<div class="row">
 						<div class="12u$">
@@ -29,5 +29,5 @@
 					</div>
 
 		</div>
-		{{ partial "footer-links.html" . }}
-	{{ partial "footer.html" . }}
+		
+	{{ end }}

@@ -1,10 +1,11 @@
-{{ partial "header.html" . }}
+{{ define "main" }}
 	<body class="single page">
+		{{ partialCached "googletagmanager.html" . }}
 
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				{{ partial "top_navigation.html" . }}
+				{{ partialCached "top_navigation.html" . }}
 
 				<!-- Main -->
 					<div id="main">
@@ -26,6 +27,6 @@
 
 			</div>
 
-			{{ partial "footer-links.html" . }}
+			
 
-{{ partial "footer.html" . }}
+{{ end }}

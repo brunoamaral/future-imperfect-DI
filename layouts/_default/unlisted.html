@@ -1,11 +1,11 @@
-{{ partial "header.html" . }}
+{{ define "main" }}
 	<body class="single page unlisted">
-	{{ partial "googletagmanager.html" }}
+	{{ partialCached "googletagmanager.html" . }}
 
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				{{ partial "top_navigation.html" . }}
+				{{ partialCached "top_navigation.html" . }}
 
 				<!-- Main -->
 					<div id="main">
@@ -21,9 +21,7 @@
 									</div>
 								</header>
 								
-								<span class="image featured"><img src="{{ with .Resources.GetMatch "header" }}
-										{{ $cover := . }}
-										{{ $image := $cover.Resize "1350x" }}{{ $image.RelPermalink }}{{else}}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{end}}" alt="" /></span>
+								<span class="image featured"><img src="{{ partial "header_image" . }}" alt="" /></span>
 								
 								<section class="article-body">
 								{{range where (where .Site.Pages.ByDate.Reverse "Type" "!=" "page") ".Params.unlisted" "=" true }} {{ .Render "summary"}} {{ end }}
@@ -38,5 +36,5 @@
 
 
 			</div>
-			{{ partial "footer-links.html" . }}
-{{ partial "footer.html" . }}
+			
+{{ end }}

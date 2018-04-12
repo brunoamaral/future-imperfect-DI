@@ -1,6 +1,9 @@
+{{ define "bodyclasses" }}
+page contentgrouptype-category contentgroupname-{{ .Title | urlize }}
+{{ end }}
+
 {{ define "main" }}
-	<body class="page contentgrouptype-category contentgroupname-{{ .Title | urlize }}">
-		{{ partialCached "googletagmanager.html" . }}
+		
 		<!-- Wrapper -->
 			<div id="wrapper">
 

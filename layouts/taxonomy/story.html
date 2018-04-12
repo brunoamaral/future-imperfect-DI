@@ -1,6 +1,9 @@
+{{ define "bodyclasses" }}
+page subhomepage contentgrouptype-stories contentgroupname-{{ .Params.story_title | urlize }} article-title-subhomepage
+{{ end }}
+
 {{ define "main" }}
-	<body class="page subhomepage contentgrouptype-stories contentgroupname-{{ .Params.story_title | urlize }} article-title-subhomepage">
-		{{ partialCached "googletagmanager.html" . }}
+		
 		<!-- Wrapper -->
 			<div id="wrapper">
 

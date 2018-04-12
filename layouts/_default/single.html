@@ -1,7 +1,9 @@
+{{ define "bodyclasses" }}
+single contentgrouptype-{{ .Section }} {{ with .Params.stories }}contentgroupname-{{ index . 0 | urlize }}{{ end }} article article-title-{{ .Title |urlize }}
+{{ end }}
 {{ define "main" }}
 {{ $baseUrl := .Site.BaseURL }}
-<body class="single contentgrouptype-{{ .Section }} {{ with .Params.stories }}contentgroupname-{{ index . 0 | urlize }}{{ end }} article article-title-{{ .Title |urlize }}">
-	{{ partialCached "googletagmanager.html" . }}
+
 		<!-- Wrapper -->
 		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ partial "header_image" . }}') 100% no-repeat; background-size: cover;"></div>
 			<div id="wrapper">

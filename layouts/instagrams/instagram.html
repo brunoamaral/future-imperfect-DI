@@ -1,7 +1,15 @@
+{{ define "bodyclasses" }}
+	single instagram contentgrouptype-instagrams contentgroupname-{{ .URL }}
+{{ end }}
+
+{{ define "bodyid" }}
+	instagram
+{{ end }}
+
 {{ define "main" }}
 {{ $baseUrl := .Site.BaseURL }}
-	<body class="single instagram contentgrouptype-instagrams contentgroupname-{{ .URL }}" id="instagram">
-	{{ partialCached "googletagmanager.html" . }}
+
+	
 		<!-- Wrapper -->
 		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ partial "header_image" . }}') 100% no-repeat / cover;"></div>
 			<div id="wrapper">

@@ -111,6 +111,12 @@ License: pixelarity.com/license
 	<!-- End Google Tag Manager -->
 </head>
 
+	<body class="{{ block "bodyclasses" . }}{{ end }}" id="{{ block "bodyid" . }}{{ end }}">	
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJBD46"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
 {{ block "main" . }}
 
 {{ end }}

@@ -1,6 +1,4 @@
 {{- with .Resources.GetMatch "header" -}}
 	{{- $image := .Resize "1350x" -}}
 	{{- $image.RelPermalink -}}
-{{- else -}}
-	{{- .Site.BaseURL -}}images/fractal_thumb.jpg
 {{- end -}}

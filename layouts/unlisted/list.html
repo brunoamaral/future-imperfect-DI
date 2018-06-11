@@ -3,23 +3,12 @@ unlisted list
 {{ end }}
 
 {{ define "main" }}
-
-		
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				{{ partialCached "top_navigation.html" . }}
-
-				<!-- Main -->
-					<div id="main">
-					{{ partialCached "title_section.html" . }}
-
 					<div class="row">
 						<div class="12u$">
 
 							<section id="category-list">
 								<div class="mini-posts">
-								{{range (.Paginate (where (where .Site.Pages.ByDate.Reverse "Type" "!=" "page") ".Params.unlisted" "!=" true )  9).Pages }}
+								{{range (.Paginate (where (where .Site.RegularPages.ByDate.Reverse "Type" "!=" "page") ".Params.unlisted" "=" true )  9).Pages }}
 									{{ .Render "summary"}}
 								{{ end }}
 								</div>
@@ -27,11 +16,8 @@ unlisted list
 						</div>
 					</div>
 
-						<div class="spacer"></div>
+						
 
 						{{ partial "pagination.html" . }}
-					</div>
-
-		</div>
 		
-	{{ end }}
+{{ end }}

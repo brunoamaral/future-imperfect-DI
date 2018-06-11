@@ -1,25 +1,16 @@
-{{ $baseurl := .Site.BaseURL }}
-<!-- Mini Post -->
-<article class="mini-post">
-	<header><a href="{{ .Permalink }}">
-		<h3>{{ .Title }}</h3>
-		<time class="published" datetime="{{ .Date.Format "2006-01-02T15:04:05" }}">{{ .Date.Format "January 2, 2006" }}</time>
-		{{ if .Params.author }}
-		{{ if .Params.avatar }}<img src="{{ .Site.BaseURL }}images/avatar_{{ .Params.avatar }}.jpg" alt="{{ .Params.author }}" class="author" /> {{ else }}<img src="{{ .Site.BaseURL }}images/avatar_bruno.jpg" alt="{{ .Params.author }}" class="author" />{{ end }}
-		{{ else }}
-
-		{{ end }}
-		<p class="readingtime">{{ .ReadingTime }} min read</p>
-	</a>
-	</header>
-		<a href="{{ .Permalink }}" title="{{ .Summary }}" class="image mini-featured-image">
+<div class="col-sm-4 col col-12">
+		<a href="{{ .Permalink }}" title="{{ .Summary }}" class="card mt-3 mx-auto">
 			{{ with .Resources.GetMatch "header" }}
-				{{ $cover := . }}
-				{{ $image := $cover.Fill "430x150" }} 
-				<img src="{{ with $image }}{{ $image.RelPermalink }}{{ else }}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{ end }}" alt="{{ $image.Name }}" />
+				{{ $image := .Fill "430x150" }} 
+				<img class="card-img-top" src="{{ $image.RelPermalink }}" alt="{{ $image.Name }}" />
 			{{ else }}
-				<img src="{{ .Site.BaseURL }}images/fractal_thumb.jpg" alt="header" />
+				<img class="card-img-top" src="{{ .Site.BaseURL }}images/fractal_thumb.jpg" alt="header" />
 			{{ end }}
-		</a>
 
-</article>
+			<h5 class="card-title px-3">{{ .Title }}</h5>
+			
+			<p class="readingtime px-3">{{ .ReadingTime }} min read</p>
+
+			<p class="mb-0 px-3 card-footer"><time class="published" datetime="{{ .Date.Format "2006-01-02T15:04:05" }}">{{ .Date.Format "January 2, 2006" }}</time></p>
+		</a>
+</div>

@@ -1,8 +1,8 @@
 name = "Light"
 license = "N/A"
 licenselink = ""
-description = "Reboot Light is blog theme for hugo."
-tags = ["blog"]
+description = "Digital Insanity is blog theme for hugo that I use in https://brunoamaral.eu/. It's built using bootstrap, with ideas and typography from Pixelarity's Future Imperfect Theme."
+tags = ["blog", "bootstrap"]
 features = ["blog"]
 min_version = 0.14
 

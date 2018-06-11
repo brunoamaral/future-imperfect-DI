@@ -1,59 +1,47 @@
-{{ define "bodyclasses" }}
-	single instagram contentgrouptype-instagrams contentgroupname-{{ .URL }}
-{{ end }}
+{{ define "bodyclasses" }}single instagram contentgrouptype-instagrams contentgroupname-{{ .URL }}{{ end }}
 
-{{ define "bodyid" }}
-	instagram
-{{ end }}
+{{ define "bodyid" }}instagram{{ end }}
 
 {{ define "main" }}
-{{ $baseUrl := .Site.BaseURL }}
 
-	
-		<!-- Wrapper -->
-		<div id="large-background" style="background: linear-gradient(360deg, rgba(244,244,244,1) 0%, rgba(244,244,244, 0) 50%), url('{{ partial "header_image" . }}') 100% no-repeat / cover;"></div>
-			<div id="wrapper">
+<div class="row justify-content-center">
+	<div class="col-md-10 col-xs-12 col-lg-8">
+		<!-- Post -->
+		<div class="card-deck">
+			<article class="card">
+				<section class="card-body">
+					<img src="{{- with .Resources.GetMatch "header" -}}{{ .Permalink }}{{ end }}" alt="">
+				</section>
 
-				{{ partialCached "top_navigation.html" . }}
+				<footer>
+					{{ if .PrevInSection }}
+						<a href="{{ .PrevInSection.URL | relLangURL }}" class="btn btn-light big previous">{{ i18n "older_photos" }}</a>
+					{{ else }}
+						<a href="#" class="disabled btn btn-light big previous">{{ i18n "older_photos" }}</a>
+					{{ end }}
+					{{ if .NextInSection }}
+							<a href="{{ .NextInSection.URL | relLangURL }}" class="btn btn-light big next">{{ i18n "newer_photos" }}</a>
+					{{ else }}
+							<a href="#" class="disabled btn btn-light big next">{{ i18n "newer_photos" }}</a>
+					{{ end }}
 
-				<!-- Main -->
-					<div id="main">
+					<ul class="list-inline">
+						<li><a href="{{ .Site.BaseURL }}instagram" class="list-inline-item">{{ i18n "instagram" }}</a></li>
+					</ul>
+				</footer>
+			</article>
+		</div>
+	</div>
+</div>
 
-						<!-- Post -->
-							<article class="post">
-								<section class="article-body">
-								<img src="{{ with .Resources.GetMatch "header" }} {{ .Permalink }}{{ end }}" alt="">
-								</section>
-
-									<ul class="actions pagination">
-									{{ if .PrevInSection }}
-										<li><a href="{{ .PrevInSection.URL | relLangURL }}" class="button big previous">{{ i18n "older_photos" }}</a></li>
-									{{ else }}
-										<li><a href="#" class="disabled button big previous">{{ i18n "older_photos" }}</a></li>
-									{{ end }}
-									{{ if .NextInSection }}
-											<li><a href="{{ .NextInSection.URL | relLangURL }}" class="button big next">{{ i18n "newer_photos" }}</a></li>
-									{{ else }}
-											<li><a href="#" class="disabled button big next">{{ i18n "newer_photos" }}</a></li>
-									{{ end }}
-									</ul>
-
-								<footer>
-									<ul class="stats">
-
-									<li><a href="{{ $baseUrl }}instagram" class="">instagram</a></li>
-
-									</ul>
-								</footer>
-							</article>
-
-					</div>
 
 					{{ partial "pagination.html" }}
 
 					<a name="comments"></a>
-					{{ template "_internal/disqus.html" . }}
-
-			</div>
+					<div class="row mx-0">
+						<div class="col-10 mx-auto">
+							{{ template "_internal/disqus.html" . }}
+						</div>
+					</div>
 			
 {{ end }}

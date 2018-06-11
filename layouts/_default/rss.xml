@@ -1,6 +1,6 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ .Site.Title }} – {{ .Title }}</title>
+    <title>{{ .Site.Title }} by Bruno Amaral</title>
     <link>{{ .Permalink }}</link>
     <description>Sharing ideas and knowledge on Digital Strategy, marketing and communication.</description>
     <generator>Hugo -- gohugo.io</generator>{{ with .Site.LanguageCode }}

@@ -1,7 +1,16 @@
-<article class="mini-post stories">
-	<header>
-		{{ with .Params.story_subtitle }} <p>{{ . }}</p>{{ end }}
-	
-	</header>
-	<a href="{{ .Permalink }}" class="image mini-featured-image" style="background-image: url('{{ with .Resources.GetMatch "sectionHeader" }}{{ $cover := . }}{{ $image := $cover.Fill "430x150" }}{{ $image.RelPermalink }}{{end}}'); {{ with .Params.story_style}} {{ . | safeCSS }} {{ end }}"><h3 style="background-color: rgba(255,255,255,0.7)">{{  .Params.story_title }}</h3></a>
-</article>
+{{ if eq (.Scratch.Get "columns") 1 }}
+<div class="col">
+	{{ else }}
+<div class="col-sm-4 col-xs-12 mb-3">
+{{ end }}
+
+	<a href="{{ .Permalink }}" class="card story" style="{{ with .Params.story_style}} {{ . | safeCSS }} {{ end }}">
+		{{ with .Resources.GetMatch "sectionHeader" }}
+		<img class="card-img-top" src="{{ $image := .Fill "430x150" }}{{ $image.RelPermalink }}" alt="">
+		{{end}}
+		<div class="card-body">
+			<h6 class="card-title">{{  .Params.story_title }}</h6>
+			<p class="card-subtitle mb-2 text-muted">{{ with .Params.story_subtitle }}{{ . }} {{ end }}</p>
+	  </div>
+	</a>
+</div>

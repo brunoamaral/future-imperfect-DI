@@ -36,6 +36,14 @@
     "translation": "Latest Post"
   },
   {
+    "id": "posts_tagged_with",
+    "translation": "Posts tagged with"
+  },
+  {
+    "id": "posts_categorized_as",
+    "translation": "Posts categorized as"
+  },
+  {
     "id":"related_links",
     "translation":"Related Links"
   },

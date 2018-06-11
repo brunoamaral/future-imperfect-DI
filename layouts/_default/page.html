@@ -1,37 +1,24 @@
 {{ define "bodyclasses" }}single page contentgrouptype-{{ .Section }} contentgroupname-{{ .Title | urlize }}{{ end }}
 {{ define "main" }}
-	
 
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				{{ partialCached "top_navigation.html" . }}
 
 				<!-- Main -->
-					<div id="main">
 
 						<!-- Post -->
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="#">{{ .Title }}</a></h2>
+										<h1 class="text-center"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
 										{{ with .Params.subtitle }}
-										<p>{{ . }}</p>
+										<p class="text-center">{{ . }}</p>
 										{{ end }}
 									</div>
 								</header>
 								
-
-								<span class="image featured"><img src="{{ partial "header_image" . }}" alt="" /></span>
+								<span class="image featured img-fluid"><img src="{{ partial "header_image" . }}" alt="" /></span>
 								
 								<section class="article-body">{{ .Content }}</section>
 
 							</article>
 
-					</div>
-
-
-
-			</div>
-			
 {{ end }}

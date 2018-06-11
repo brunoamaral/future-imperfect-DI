@@ -4,21 +4,12 @@
 
 {{ define "main" }}
 
-		
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				{{ partialCached "top_navigation.html" . }}
-
-				<!-- Main -->
-					<div id="main">
-					{{ partialCached "title_section.html" . }}
 
 					<div class="row">
 						<div class="12u$">
-						<h1 class="center-text">{{ .Title | humanize }}</h1>
+						<h1 class="text-center">{{ .Title | humanize }}</h1>
 							<section id="category-list">
-								<div class="mini-posts">???
+								<div class="mini-posts">
 									{{ range .Data }}
 										{{ .Render "summary"}}
 									{{ end }}
@@ -27,11 +18,9 @@
 						</div>
 					</div>
 
-						<div class="spacer"></div>
+						
 
 						{{ partial "pagination.html" . }}
-					</div>
 
-		</div>
 		
-	{{ end }}
+{{ end }}

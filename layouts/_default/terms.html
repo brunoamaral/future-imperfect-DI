@@ -3,53 +3,39 @@ terms contentgrouptype-terms contentgroupname-the-stories article-title-subhomep
 {{ end }}
 
 {{ define "main" }}
+					<section class=""> 
+					<h3 class="text-center">{{ i18n "stories" }}</h3>
+						<div class="card-deck">
 
-		<!-- Wrapper -->
-		<div id="wrapper">
+						<div class="row px-3">
+							{{ $stories := where (where .Site.Pages "Section" "stories") ".Params.unlisted" "!=" true | intersect (where .Site.Pages "Params.story_published" "=" true) }}
 
-				{{ partialCached "top_navigation.html" . }}
-
-				<!-- Main -->
-				<div id="main">
-					{{ partial "title_section.html" .}} 
-					<section id="category-list">
-					<h2>stories</h2>
-						<div class="mini-posts">
-						{{ $baseurl := .Site.BaseURL }}
-
-						{{ $stories := where (where .Site.Pages "Section" "stories") ".Params.unlisted" "!=" true | intersect (where .Site.Pages "Params.story_published" "=" true)  }}
-						{{ range $stories }} 
-						{{ partial "story-card.html" . }}
-						{{ end }}
+							{{ range $stories }} 
+								{{ .Scratch.Set "columns" (len $stories) }}
+								{{ partial "story-card.html" . }}
+							{{ end }}
+						</div>
 						</div>
 					</section>
 					
 					<section id="all-categories">
-					<article class="post">
+					<article class="px-3">
 
-						<h2>{{ i18n "categories" }}</h2>
-							<ul>
-									{{ $baseurl := .Site.BaseURL }}
-									<!-- {{ $list_posts := where (where (where .Data.Pages "Type" "post") ".Params.unlisted" "!=" true) ".Params.draft" "=" false }} -->
+						<h3>{{ i18n "categories" }}</h3>
+							<ul>		
 									{{ range $key, $value := .Site.Taxonomies.categories }}
-										<li><a href="{{ $baseurl  }}categories/{{ $key | urlize  }}">{{ $key | humanize }}</a> ({{ len $value }})</li>
+										<li><a href="{{ printf "categories/%s/" $key | relLangURL }}" title="{{ i18n "posts_categorized_as" }} {{ $key | humanize }}">{{ $key | humanize }}</a> ({{ len $value }})</li>
 									{{ end }}
 							</ul>
 
-							<h2>{{ i18n "tags" }}</h2>
-								<ul class="tags">
-										{{ $baseurl := .Site.BaseURL }}
+							<h3>{{ i18n "tags" }}</h3>
+								<ul class="tags">			
 										{{ range $key, $value := .Site.Taxonomies.tags }}
-										<li><a href="{{ $baseurl  }}tags/{{ $key | urlize  }}" title="Posts tagged with '{{ $key | humanize }}'">{{ $key | humanize }}</a> ({{ len $value }})</li>
+										<li><a href="{{ printf "tags/%s/" $key | relLangURL }}" title="{{ i18n "posts_tagged_with" }} {{ $key | humanize }}">{{ $key | humanize }}</a> ({{ len $value }})</li>
 										{{ end }}
 								</ul>
 
 					</article>
 					</section>
 
-				</div>
-
-		</div>
-		
-
-		{{ end }}
+{{ end }}

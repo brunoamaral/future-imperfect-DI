@@ -26,6 +26,8 @@
   "older_photos": {
     "other": "Fotos anteriores"
   },
+  "posts_tagged_with": { "other": "Artigos com a etiqueta"},
+  "posts_categorized_as": { "other": "Artigos com a categoria"},
   "related_links":{
     "other":"Links relacionados"
   },

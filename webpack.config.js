@@ -11,7 +11,7 @@ const config = {
     watchOptions: {
         ignored: /woff/,
     },
-    devtool: 'eval',
+    // devtool: 'eval',
     mode: 'production',
     module: {
         rules: [{

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!--
+Future Imperfect by Pixelarity
+pixelarity.com | hello@pixelarity.com
+License: pixelarity.com/license
+1136239445
+-->
+<html lang="{{ .Lang }}">
+<head>
+	{{ if .IsHome }}
+	<title>Bruno Amaral's Digital Insanity</title>
+	{{ else }}
+	<title>{{ .Site.Title }}{{ with .Title }} - {{ . | humanize }}{{ end }}{{ with .Params.story_title }}-{{ . }}{{ end }}</title>
+	{{ end }}
+	{{ .Hugo.Generator }}
+	<meta charset="utf-8" />
+	{{ if isset .Params "unlisted" }}
+	{{ if eq .Params.unlisted true }}
+	<meta name="robots" content="noindex, nofollow">
+	{{ end }}
+	{{ end }}
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="/assets/css/main.css?{{ now.Format "200601021504" }}" />
+
+	{{ with .OutputFormats.Get "rss" }}
+	<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ $.Site.Title }}">
+	{{ end }}
+
+	<link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Lang }}">
+	{{ if .IsTranslated }}
+	    {{ range .Translations }}
+	<link rel="alternate" href="{{ .Permalink }}" hreflang="{{ .Lang }}">
+	    {{ end}}
+	{{ end }}
+
+	<!-- core open graph -->
+	{{ template "_internal/opengraph.html" . }}
+	<!-- end core open graph -->
+	<meta property="og:site_name" content="{{ .Site.Title }} by Bruno Amaral" />
+
+	{{ if .IsHome }}
+		<meta name="description" content="{{ .Site.Params.description }}" />
+		<meta property="og:image" content="{{ .Site.BaseURL}}images/logo.png" />
+	{{ else }}
+		<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+	{{ if and (.Section) (ne .IsPage true) }}
+		{{ with .Resources.GetMatch "sectionHeader" }}
+			{{ $image := .Fill "500x500" }} 
+			<meta property="og:image" content="{{ with $image }}{{ $image.Permalink }}{{ else }}{{ .Site.BaseURL }}images/fractal_thumb.jpg{{ end }}" />
+		{{ end }}
+	{{end}}
+
+	{{ if .IsPage }}
+		{{ with .Resources.GetMatch "header" }}
+			{{ $image := .Fill "500x500" }} 
+			<meta property="og:image" content="{{ $image.Permalink }}" />
+		{{ else }}
+			<meta property="og:image" content="{{ .Site.BaseURL }}images/fractal_thumb.jpg" />
+		{{ end }}
+	{{ end }}
+
+	{{ end }}
+	{{ if not .Date.IsZero }}<meta property="og:updated_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}"/>{{ end }}
+{{ with .Params.audio }}<meta property="og:audio" content="{{ . }}" />{{ end }}
+{{ with .Params.locale }}<meta property="og:locale" content="{{ . }}" />{{ end }}
+	{{ with .Params.videos }}{{ range .Params.videos }}
+	<meta property="og:video" content="{{ . | absURL }}" />{{ end }}{{ end }}
+	<!-- If it is part of a story, link to related articles -->
+	{{ if .IsPage }}
+	<link rel="author" href="{{ if .Params.author_googleplus }}{{ .Params.author_googleplus }}{{else}}{{.Site.Params.Authors.Bruno.googleplus}}{{end}}"/>
+		{{ $permalink := .Permalink }} {{ $siteSeries := .Site.Taxonomies.stories }}
+	{{ with .Params.story }}
+	{{ range $name := . }}
+	  {{ $stories := index $siteSeries $name }}
+	  {{ range $page := first 6 $stories.Pages }}
+	    {{ if ne $page.Permalink $permalink }}<meta property="og:see_also" content="{{ $page.Permalink }}" />{{ end }}
+	  {{ end }}
+	{{ end }}{{ end }}
+	<meta property="article:author" content="Bruno Amaral" />
+	<meta property="article:publisher" content="https://www.facebook.com/brunoamaral" />
+	<meta property="article:modified_time" content="{{ .Lastmod }}" />
+	<meta property="article:section" content="{{ .Section }}" />
+	{{ with .Params.tags }}{{ range first 6 . }}
+	<meta property="article:tag" content="{{ . }}" />{{ end }}{{ end }}
+	{{ end }}
+	<meta name="twitter:dnt" content="on">
+
+	<!-- Facebook Page Admin ID for Domain Insights -->
+	{{ with .Site.Social.facebook_admin }}<meta property="fb:admins" content="{{ . }}" />{{ end }}
+	{{ with .Site.Social.facebook_app_id }}<meta property="fb:app_id" content="{{ . }}" />{{ end }}
+	{{ template "_internal/google_news.html" . }}
+	{{ template "_internal/twitter_cards.html" . }}
+	<meta name="google-site-verification" content="iq9hxT-I3CU7ob10yMOtv8JBdja9Jg8lAe8VGZFgo7E" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-MJBD46');</script>
+	<!-- End Google Tag Manager -->
+</head>
+
+	<body class="{{ block "bodyclasses" . }}{{ end }}" id="{{ block "bodyid" . }}{{ end }}">	
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJBD46"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<header class="mb-5">
+		<!-- Menu -->
+		<nav class="navbar navbar-expand-lg navbar-light custom-bg-transparent fixed-top">
+		    <a class="navbar-brand py-0" href="/">{{ .Site.Title }}</a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="collapse navbar-collapse" id="topNav">
+		        <ul class="navbar-nav mr-auto my-0 py-0">
+		            {{ range .Site.Menus.main }}
+		            <li class="nav-item my-0 py-0"><a href="{{ .URL | absLangURL }}" title="{{ .Post }}" class="nav-link top-menu menu-click {{ if ($.Page.IsMenuCurrent "main" .) ($.Page.HasMenuCurrent "main" .) }} active {{ end }}">{{ .Name }}</a></li>
+		            {{ end }} {{ if .Site.IsMultiLingual }} {{ range .Site.Languages }} {{ if eq . $.Site.Language }}
+		            <li class="nav-item my-0 py-0"><a href="#" class="nav-link active language">{{ .Lang }}</a></li>
+		            {{ else }} {{ range $.Translations }}
+		            <li class="nav-item my-0 py-0"><a href="{{ .Permalink }}" class="nav-link">{{ .Lang }}</a></li>
+		            {{ end }} {{ end }} {{ end }} {{ end }}
+		        </ul>
+		        <ul class="nav navbar my-0 py-0">
+		            <li class="search nav-item my-0 py-0">
+		                <a class="fa fa-search nav-link" href="#search"><span class="sr-only sr-only-focusable">{{ i18n "search" }}</span></a>
+		            </li>
+		        </ul>
+		    </div>
+		</nav>
+
+					<div id="morphsearch" class="morphsearch">
+						<form class="morphsearch-form" id="search" onsubmit="return false"></form>
+						<div class="container">
+							<div class="morphsearch-content">
+								<p>Search powered by <a href="https://algolia.com">Algolia</a></p>
+							</div><!-- /morphsearch-content -->
+							<span class="morphsearch-close"></span>		
+						</div>			
+					</div><!-- /morphsearch -->
+			<!-- End Menu -->
+	</header>
+
+			<main role="main" class="container-fluid p-0">
+										<!-- Intro -->
+				{{ if ne .Kind "page" }}
+
+				<div class="row m-0">
+					<div class="col"> 
+						<section id="intro" class="d-sm-none d-md-block mx-auto d-block text-center">
+							<a href="{{ .Site.BaseURL | absLangURL }}{{ .LanguagePrefix }}" title="Digital Insanity, a blog by Bruno Amaral" class="logo">
+							<svg class="" id="svgLogo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 298.08 217.6"><defs><linearGradient id="linear-gradient" x1="217.44" y1="62.32" x2="284.9" y2="179.16" gradientUnits="userSpaceOnUse"><stop offset="0" stop-opacity="0"/><stop offset="0.13" stop-opacity="0.32"/><stop offset="1"/></linearGradient><linearGradient id="linear-gradient-2" x1="88.99" y1="21.73" x2="168.02" y2="158.61" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-3" x1="144.62" y1="-15.26" x2="205.7" y2="90.52" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-4" x1="211.44" y1="1.31" x2="248.59" y2="65.64" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-5" x1="138.98" y1="86.99" x2="211.16" y2="86.99" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-6" x1="21.81" y1="31.32" x2="109.69" y2="183.53" xlink:href="#linear-gradient"/></defs><title>Blue Perspective</title><polyline points="297.63 48.03 218.69 215.65 210.31 96.21 238.18 50.85" style="fill:none;stroke-miterlimit:10;stroke:url(#linear-gradient)"/><path d="M333.62,279.22,466,337.61l-95.55-3.41-36.85-55m-2.06-1.73,38.5,57.44,99.83,3.56-138.34-61Z" transform="translate(-331.04 -172.52)"/><polyline points="76.56 29.05 105.76 133.31 158.12 163.72 201.13 133.41 190.55 116.8 135.62 22.84" style="fill:none;stroke-miterlimit:10;stroke:url(#linear-gradient-2)"/><path d="M526.78,182.55" transform="translate(-331.04 -172.52)" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:0.25px"/><polyline points="195.73 10.03 177.98 104.97 139.58 38.99 117.78 0.24" style="fill:none;stroke-miterlimit:10;stroke:url(#linear-gradient-3)"/><path d="M515.73,189.67" transform="translate(-331.04 -172.52)" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:0.25px"/><polyline points="184.69 17.15 177.98 45.58 207.35 52.46 210.31 87.03 286.69 28.12" style="fill:none;stroke-miterlimit:10;stroke:url(#linear-gradient-4)"/><path d="M537.82,262.82l17,34.16-5.76,89.86-65-42.59,53.74-81.43m.09-1.5L483,344.47l66.7,43.71,5.86-91.35-17.69-35.51Z" transform="translate(-331.04 -172.52)"/><polygon points="139.58 38.99 204.14 55.1 210.61 135.06 151.99 125.73 139.58 38.99" style="fill:none;stroke-miterlimit:10;stroke:url(#linear-gradient-5)"/><polyline points="100.93 59.38 138.86 165.97 122.45 170.25 0.52 103.22 4.5 41.63" style="fill:none;stroke-miterlimit:10;stroke:url(#linear-gradient-6)"/><path d="M611.45,261.33,584,357.14l-27.31-14.06,54.76-81.75m2-4.39-57.89,86.42,28.87,14.87,29-101.29Z" transform="translate(-331.04 -172.52)"/>
+							<polygon id="blue" points="139.58 38.99 203.58 54.9 209.99 133.86 151.88 124.64 139.58 38.99" style="fill:#009de0"/></svg>
+							<header>
+								<h2 class="text-center">{{ .Site.Title }}</h2>
+								<p class="text-center">{{ .Params.subtitle }}</p>
+							</header>
+							</a>
+						</section>
+					</div>
+				</div>
+				{{ end }}
+
+				{{ block "main" . }}
+
+				{{ end }}
+			</main>
+
+<!-- Footer -->
+	<section id="footer" class="mx-auto">
+	<h2 class="sr-only">{{ i18n "related_links" }}</h2>
+		<ul class="icons mx-auto list-inline text-center">
+			<li class="list-inline-item"><a href="https://twitter.com/brunoamaral" class="fa fa-twitter"><span class="sr-only sr-only-focusable">Twitter</span></a></li>
+			<li class="list-inline-item"><a href="https://www.linkedin.com/in/brunoamaral" class="fa fa-linkedin"><span class="sr-only sr-only-focusable">LinkedIn</span></a></li>
+			<li class="list-inline-item"><a href="https://www.facebook.com/Bruno-Amaral-118353851516878/" class="fa fa-facebook"><span class="sr-only sr-only-focusable">Facebook</span></a></li>
+			<li class="list-inline-item"><a href="https://instagram.com/brunoamaral" class="fa fa-instagram"><span class="sr-only sr-only-focusable">Instagram</span></a></li>
+			<li class="list-inline-item"><a href="https://github.com/brunoamaral" class="fa fa-github"><span class="sr-only sr-only-focusable">Github</span></a></li>
+			<li class="list-inline-item"><a href="{{ .RSSLink }}" class="fa fa-rss"><span class="sr-only sr-only-focusable">RSS</span></a></li>
+			<li class="list-inline-item"><a href="/page/contact" class="fa fa-envelope"><span class="sr-only sr-only-focusable">Email</span></a></li>
+		</ul>
+		<p class="copyright text-center">&copy; Bruno Amaral | <a href="/page/privacy-policy/">Privacy Policy</a></p>
+	</section>
+
+{{ if .HasShortcode "gallery" }}
+	
+	<!-- Root element of PhotoSwipe. Must have class pswp. -->
+	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+	<!-- Background of PhotoSwipe.
+	     It's a separate element, as animating opacity is faster than rgba(). -->
+	<div class="pswp__bg"></div>
+	<!-- Slides wrapper with overflow:hidden. -->
+	<div class="pswp__scroll-wrap">
+	    <!-- Container that holds slides.
+	      PhotoSwipe keeps only 3 of them in DOM to save memory.
+	      Don't modify these 3 pswp__item elements, data is added later on. -->
+	    <div class="pswp__container">
+	      <div class="pswp__item"></div>
+	      <div class="pswp__item"></div>
+	      <div class="pswp__item"></div>
+	    </div>
+	    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+	    <div class="pswp__ui pswp__ui--hidden">
+	    <div class="pswp__top-bar">
+	      <!--  Controls are self-explanatory. Order can be changed. -->
+	      <div class="pswp__counter"></div>
+	      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+	      <button class="pswp__button pswp__button--share" title="Share"></button>
+	      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+	      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+	      <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+	      <!-- element will get class pswp__preloader--active when preloader is running -->
+	      <div class="pswp__preloader">
+	        <div class="pswp__preloader__icn">
+	          <div class="pswp__preloader__cut">
+	            <div class="pswp__preloader__donut"></div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+	      <div class="pswp__share-tooltip"></div>
+	    </div>
+	    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+	    </button>
+	    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+	    </button>
+	    <div class="pswp__caption">
+	      <div class="pswp__caption__center"></div>
+	    </div>
+	    </div>
+	    </div>
+	</div>
+	<link rel="stylesheet" href="/plugins/photoswipe/photoswipe.css">
+	<link rel="stylesheet" href="/plugins/photoswipe/default-skin/default-skin.css">
+
+	<script src="/plugins/photoswipe/photoswipe.min.js"></script>
+	<script src="/plugins/photoswipe/photoswipe-ui-default.min.js"></script>
+	<script src="/plugins/photoswipe/initphotoswipe.js"></script>
+	<script>initPhotoSwipeFromDOM('.gallery');</script>
+{{ end }} 
+
+		<!-- Scripts -->
+
+		<script src="/main.js"></script> <!-- this is our main js file, includes bootstrap, popper, and jquery -->
+			{{ if ne .Params.disable_animations true }}
+			<!-- <script src="/dist/assets/js/custom.js"></script>				 -->
+			{{ end }}
+			<script type="application/ld+json">
+			{ "@context": "http://schema.org", 
+			{{ if .IsHome }}
+			"@type": "WebSite",
+			{{ else }}
+			"@type": "Article",
+			{{ end }}
+
+			"mainEntityOfPage": {
+				"@type": "WebPage",
+				"@id": "{{ .Permalink }}"
+				},
+			"headline": "{{ .Title }}",
+			{{ with .Params.subtitle }}"alternativeHeadline": "{{ . }}",{{ end }}
+			"image": "{{- if .IsHome -}}
+						{{ .Site.BaseURL}}images/logo.png
+						{{- else -}}
+							{{- with $.Page.Resources.GetMatch "header" -}}
+							{{ .Permalink }}
+						{{- end -}}
+						{{- end -}}",
+			"author": {
+			   "@type": "Person",
+			   "name": "Bruno Amaral"
+			},			 
+			{{ with .Params.tags }}"keywords": "{{ range first 6 . }}{{ . }}{{ end }}",{{ end }} 
+			"wordcount": "{{ .WordCount }}",
+			"publisher": {
+			 "@type": "Organization",
+			 "name": "Bruno Amaral",
+			 "logo": {
+			   "@type": "ImageObject",
+			   "url": "{{ .Site.BaseURL }}images/brunoamaral_digital_insanity_logo.png",
+			   "height": 60
+			 }
+			},
+			"url": "{{ .Site.BaseURL }}",
+			"datePublished": "{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}{{ end }}",
+			"dateCreated": "{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}{{ end }}",
+			"dateModified": "{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}{{ end }}",
+			"description": "{{ if .Params.description }}{{ .Params.description | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}",
+			"articleBody": "{{ .Plain  }}"
+			}
+			</script>
+
+		</body>
+</html>

@@ -1,0 +1,15 @@
+{{ define "bodyclasses" }}section-list post-list post-list-html contentgrouptype-{{ .Kind }} contentgroupname-{{ .Section | urlize }} {{ end }}
+
+{{ define "main" }}
+ 	<h1 class="text-center">{{ .Title }}</h1>
+
+		<section id="category-list" class="card-group">
+				<div class="row px-2">
+					{{ range .Paginator.Pages }}
+						{{ .Render "summary" }}
+					{{ end }}
+				</div>
+		</section>
+
+		{{ partial "pagination.html" . }}
+{{ end }}

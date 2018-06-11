@@ -1,0 +1,23 @@
+{{ define "bodyclasses" }}
+unlisted list	
+{{ end }}
+
+{{ define "main" }}
+					<div class="row">
+						<div class="12u$">
+
+							<section id="category-list">
+								<div class="mini-posts">
+								{{range (.Paginate (where (where .Site.RegularPages.ByDate.Reverse "Type" "!=" "page") ".Params.unlisted" "=" true )  9).Pages }}
+									{{ .Render "summary"}}
+								{{ end }}
+								</div>
+							</section>
+						</div>
+					</div>
+
+						
+
+						{{ partial "pagination.html" . }}
+		
+{{ end }}

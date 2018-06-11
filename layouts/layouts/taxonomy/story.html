@@ -1,0 +1,48 @@
+{{ define "bodyclasses" }}story page subhomepage contentgrouptype-stories contentgroupname-{{ .Params.story_slug | urlize }} article-title-subhomepage{{ end }}
+
+{{ define "main" }}
+				
+	<div class="row mx-0">
+		<article class="post d-block col px-0">
+		<header {{ with .Params.story_style }}style="{{ . | safeCSS }}"{{end}}>
+			<div class="title text-center">
+				<h1>{{ .Params.story_title }}</h1>
+				{{ with .Params.story_subtitle }} <p class="mb-0">{{ . }}</p> {{ end }}
+			</div>
+		</header>
+
+			{{ with .Resources.GetMatch "sectionHeader" }}
+			{{ $image := .Fill "900x600" }}
+							<div class="" style="background: no-repeat center/cover url({{ $image.RelPermalink }}); height: {{ with $.Params.story_header_height }} {{ . }} {{ else  }} 200px{{ end }};"></div>		{{ end }}
+
+
+					<section class="article-body">
+					{{ with .Params.story_description }}
+					<p>{{ . }}</p>
+					{{ end }}
+					{{ .Content }}
+					</section>
+
+		</article>
+	</div>
+
+	<div class="card-deck mx-0">
+		<div class="row mx-0">
+		{{ if eq .Params.unlisted true }}
+		{{range (.Paginate ( where .Data.Pages "Type" "stories")  9).Pages}}
+			{{ .Render "summary"}}
+		{{ end }}
+		{{ else }}
+			{{range (.Paginate (where ( where .Data.Pages "Type" "stories") ".Params.unlisted" "!=" true)  9).Pages}}
+				{{ .Render "summary"}}
+			{{ end }}
+		{{ end }}
+		</div>
+	</div>
+
+						
+
+{{ partial "pagination.html" . }}
+
+		
+{{ end }}

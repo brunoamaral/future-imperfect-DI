@@ -1,0 +1,26 @@
+{{ define "bodyclasses" }}
+	instagram terms terms-html
+{{ end }}
+
+{{ define "main" }}
+
+
+					<div class="row">
+						<div class="12u$">
+						<h1 class="text-center">{{ .Title | humanize }}</h1>
+							<section id="category-list">
+								<div class="mini-posts">
+									{{ range .Data }}
+										{{ .Render "summary"}}
+									{{ end }}
+								</div>
+							</section>
+						</div>
+					</div>
+
+						
+
+						{{ partial "pagination.html" . }}
+
+		
+{{ end }}

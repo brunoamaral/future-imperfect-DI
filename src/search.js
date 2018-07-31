@@ -83,7 +83,15 @@ hits({
 // );
 
 search.start();
-
+$(document).ready(function() {
+    var input = document.getElementsByClassName('ais-search-box--input');
+    input[0].addEventListener('keyup', function(e) {
+      if (this.value.toLowerCase() === 'soumaya'){
+        console.log('1')
+        document.location = 'https://brunoamaral.eu/stories/soumaya/'
+      }
+    }, true);
+});
 // HERE COMES THE MORPHING SEARCH
 
 (function() {

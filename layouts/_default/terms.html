@@ -7,7 +7,7 @@ terms contentgrouptype-terms contentgroupname-the-stories article-title-subhomep
 					<h3 class="text-center">{{ i18n "stories" }}</h3>
 						<div class="card-deck">
 
-						<div class="row px-3">
+						<div class="row px-3 mx-0">
 							{{ $stories := where (where .Site.Pages "Section" "stories") ".Params.unlisted" "!=" true | intersect (where .Site.Pages "Params.story_published" "=" true) }}
 
 							{{ range $stories }} 

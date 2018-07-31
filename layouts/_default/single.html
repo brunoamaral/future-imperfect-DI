@@ -64,7 +64,7 @@
 					{{ if .Params.stories }} 
 					
 					{{ $name_url := index .Params.stories 0 | urlize }}
-					{{ $this := $.Site.GetPage "taxonomy" "stories" $name_url }}
+					{{ $this := $.Site.GetPage ( printf "/stories/" $name_url) }}
 
 					<section id="category-list" class="px-5">
 						<h2>{{ $this.Params.story_title }}</h2>
